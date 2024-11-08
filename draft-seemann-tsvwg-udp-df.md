@@ -10,8 +10,8 @@ number:
 date:
 consensus: true
 v: 3
-area: AREA
-workgroup: TSV
+area: "Web and Internet Transport"
+workgroup: "Transport and Services Working Group"
 keyword:
  - Don't Fragment
 
