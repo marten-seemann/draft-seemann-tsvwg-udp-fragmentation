@@ -116,8 +116,9 @@ Table of Contents
 
 4.  Linux
 
-   IPv4: IP_MTU_DISCOVER, IP_PMTUDISC_DO IPv6: IPV6_MTU_DISCOVER,
-   IPV6_PMTUDISC_DO
+   IPv4: IP_MTU_DISCOVER, IP_PMTUDISC_DO
+
+   IPv6: IPV6_MTU_DISCOVER, IPV6_PMTUDISC_DO
 
    works on dual-stack sockets: yes
 
@@ -125,7 +126,9 @@ Table of Contents
 
 5.1.  On a per-socket basis
 
-   IPv4: IP_DONTFRAG, 1 IPv6: IPV6_DONTFRAG, 1
+   IPv4: IP_DONTFRAG, 1
+
+   IPv6: IPV6_DONTFRAG, 1
 
    works on dual-stack sockets: no
 
@@ -138,7 +141,9 @@ Table of Contents
 
 6.  Windows
 
-   IPv4: IP_DONTFRAG, 1 IPv6: IPV6_DONTFRAG, 1
+   IPv4: IP_DONTFRAG, 1
+
+   IPv6: IPV6_DONTFRAG, 1
 
    works on dual-stack sockets: yes.  TODO: double check the above
 
