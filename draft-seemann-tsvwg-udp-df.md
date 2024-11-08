@@ -65,6 +65,44 @@ sockets across different platforms.
 {::boilerplate bcp14-tagged}
 
 
+# Setting the DF bit
+
+# Linux
+
+IPv4: IP_MTU_DISCOVER, IP_PMTUDISC_DO
+
+IPv6: IPV6_MTU_DISCOVER, IPV6_PMTUDISC_DO
+
+works on dual-stack sockets: yes
+
+# Apple
+
+## On a per-socket basis
+
+IPv4: IP_DONTFRAG, 1
+
+IPv6: IPV6_DONTFRAG, 1
+
+works on dual-stack sockets: no
+
+TODO: describe the failure. Does it apply to IPv4 or IPV6 only, or both?
+
+## Network.framework
+
+TODO: figure out how this works
+
+# Windows
+
+IPv4: IP_DONTFRAG, 1
+
+IPv6: IPV6_DONTFRAG, 1
+
+works on dual-stack sockets: yes. TODO: double check the above
+
+When sending a too large packet, a WSAEMSGSIZE error is returned. TODO: figure
+out what exactly triggers this error
+
+
 # Security Considerations
 
 TODO Security
