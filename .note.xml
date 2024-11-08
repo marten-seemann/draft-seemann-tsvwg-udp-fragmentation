@@ -1,0 +1,7 @@
+<note title="Discussion Venues" removeInRFC="true">
+<t>Discussion of this document takes place on the
+    Transport and Services Working Group Working Group mailing list (tsvwg@ietf.org),
+    which is archived at <eref target="https://mailarchive.ietf.org/arch/browse/tsvwg/"/>.</t>
+<t>Source for this draft and an issue tracker can be found at
+    <eref target="https://github.com/marten-seemann/draft-seemann-tsvwg-udp-df"/>.</t>
+</note>
