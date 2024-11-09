@@ -67,17 +67,29 @@ sockets across different platforms.
 
 # Setting the DF bit
 
-# Linux
+While routers don't fragment IPv6 packets in transit, the sender's kernel will
+still fragment UDP datagrams that are too large to fit the MTU of the interface
+before sending a packet into the network. Therefore, operating systems offer
+socket options to control the fragmentation behavior for IPv6 packets.
 
-IPv4: IP_MTU_DISCOVER, IP_PMTUDISC_DO
+For user-space implementations of DPLPMTUD, applications need to set the DF bit on
+IPv4 sockets and prevent fragmentation on IPv6 sockets.
 
-IPv6: IPV6_MTU_DISCOVER, IPV6_PMTUDISC_DO
+## Linux
+
+Linux uses the socket option of level IPPROTO_IP with name IP_MTU_DISCOVER with
+value IP_PMTUDISC_DO for IPv4.
+
+For IPv6, IPV6_MTU_DISCOVER with a value of IPV6_PMTUDISC_DO is used for the
+IPPROTO_IPV6 level.
+
+For dual-stack sockets, both socket options can be set independently.
 
 works on dual-stack sockets: yes
 
-# Apple
+## Apple
 
-## On a per-socket basis
+### On a per-socket basis
 
 IPv4: IP_DONTFRAG, 1
 
@@ -87,11 +99,11 @@ works on dual-stack sockets: no
 
 TODO: describe the failure. Does it apply to IPv4 or IPV6 only, or both?
 
-## Network.framework
+### Network.framework
 
 TODO: figure out how this works
 
-# Windows
+## Windows
 
 IPv4: IP_DONTFRAG, 1
 
