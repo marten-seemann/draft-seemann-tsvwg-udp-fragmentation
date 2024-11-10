@@ -1,0 +1,16 @@
+name: Test
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile code
+        run: gcc code/main.c -o main
+      - name: Run IPv4 test
+        run: ./main ipv4
+      - name: Run IPv6 test
+        run: ./main ipv6
+      - name: Run dual stack test
+        run: ./main dual
