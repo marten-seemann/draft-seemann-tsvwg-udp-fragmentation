@@ -14,7 +14,7 @@
 #define SERVER_IPV6 "2001:4860:4860::8888"
 #define SERVER_PORT 12345
 #define PACKET_COUNT 5
-#define PACKET_INTERVAL 1 // seconds
+#define PACKET_INTERVAL 0.5 // seconds
 #define PACKET_SIZE 2000
 
 typedef enum {
@@ -104,7 +104,7 @@ int main(int argc, char *argv[]) {
                 printf("sendto v6: %s\n", strerror(errno));
             }
         }
-        sleep(PACKET_INTERVAL);
+        usleep(PACKET_INTERVAL * 1000000);
     }
 
     close(sock);
