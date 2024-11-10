@@ -8,6 +8,7 @@
 #include <netinet/ip.h>
 #include <netinet/ip6.h>
 #include <arpa/inet.h>
+#include <errno.h>
 
 #define SERVER_IPV4 "8.8.8.8"
 #define SERVER_IPV6 "2001:4860:4860::8888"
@@ -94,13 +95,13 @@ int main(int argc, char *argv[]) {
         if(net_type == IPV4 || net_type == DUAL) {
             printf("Sending IPv4 packet #%d\n", i+1);
             if (sendto(sock, packet, sizeof(packet), 0, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
-                perror("sendto");
+                printf("sendto v4: %s\n", strerror(errno));
             }
         }
         if(net_type == IPV6 || net_type == DUAL) {
             printf("Sending IPv6 packet #%d\n", i+1);
             if (sendto(sock, packet, sizeof(packet), 0, (struct sockaddr *)&server_addrv6, sizeof(server_addrv6)) < 0) {
-                perror("sendto");
+                printf("sendto v6: %s\n", strerror(errno));
             }
         }
         sleep(PACKET_INTERVAL);
