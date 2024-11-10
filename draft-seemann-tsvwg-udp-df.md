@@ -91,13 +91,21 @@ works on dual-stack sockets: yes
 
 ### On a per-socket basis
 
-IPv4: IP_DONTFRAG, 1
+For IPv4, Apple platforms use the socket option of level IPPROTO_IP with name
+IP_DONTFRAG with value 1. For IPv6, IPV6_DONTFRAG with value 1 is used for the
+IPPROTO_IPV6 level.
 
-IPv6: IPV6_DONTFRAG, 1
+However, dual-stack sockets are handled differently: To open a dual-stack socket,
+an IPv6 socket needs to be opened and the IPV6_V6ONLY option needs to be set to
+0. This enables the socket to send both IPv4 and IPv6 packets. IPv4 packets must
+be sent using an IPv4-mapped IPv6 address.
 
-works on dual-stack sockets: no
+When using a dual-stack socket, it is only necessary (and possible) to set the
+IPV6_DONTFRAG socket option. This results in the DF bit being set when sending
+IPv4 packets.
 
-TODO: describe the failure. Does it apply to IPv4 or IPV6 only, or both?
+TODO: I remember that IPV6_DONTFRAG didn't cause the DF bit to be set. Was this
+fixed recently?
 
 ### Network.framework
 

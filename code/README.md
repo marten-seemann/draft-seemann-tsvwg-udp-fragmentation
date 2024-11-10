@@ -4,8 +4,14 @@ This code demonstrates how the kernel handles IP packet fragmentation on IPv4, I
 
 ## Usage
 
+On Linux:
 ```sh
 gcc -o main main.c
+```
+
+On macOS:
+```sh
+gcc -D__APPLE_USE_RFC_3542 -o main main.c
 ```
 
 Send on an IPv4 socket:
