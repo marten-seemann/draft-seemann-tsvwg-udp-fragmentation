@@ -49,13 +49,13 @@ jobs:
         run: cl code/main.c /Fe:main.exe ws2_32.lib
       - name: Run IPv4 test
         run: |
-          "C:\Program Files\Wireshark\tshark.exe" -i any -f "port 12345" -V &
+          Start-Process -FilePath "C:\Program Files\Wireshark\tshark.exe" -ArgumentList "-i", "any", "-f", "port 12345", "-V"
           ./main.exe ipv4
       - name: Run IPv6 test
         run: |
-          "C:\Program Files\Wireshark\tshark.exe" -i any -f "port 12345" -V &
+          Start-Process -FilePath "C:\Program Files\Wireshark\tshark.exe" -ArgumentList "-i", "any", "-f", "port 12345", "-V"
           ./main.exe ipv6
       - name: Run dual stack test
         run: |
-          "C:\Program Files\Wireshark\tshark.exe" -i any -f "port 12345" -V &
+          Start-Process -FilePath "C:\Program Files\Wireshark\tshark.exe" -ArgumentList "-i", "any", "-f", "port 12345", "-V"
           ./main.exe dual
