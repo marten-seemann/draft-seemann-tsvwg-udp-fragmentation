@@ -85,9 +85,8 @@ IPPROTO_IPV6 level.
 
 For dual-stack sockets, both socket options can be set independently.
 
-## Apple
 
-### On a per-socket basis
+## Apple
 
 For IPv4, Apple platforms use the socket option of level IPPROTO_IP with name
 IP_DONTFRAG with value 1. For IPv6, IPV6_DONTFRAG with value 1 is used for the
@@ -100,14 +99,9 @@ be sent using an IPv4-mapped IPv6 address.
 
 When using a dual-stack socket, it is only necessary (and possible) to set the
 IPV6_DONTFRAG socket option. This results in the DF bit being set when sending
-IPv4 packets.
+IPv4 packets. It is not possible to control the fragmentation behavior of IPv4
+and IPv6 separately.
 
-TODO: I remember that IPV6_DONTFRAG didn't cause the DF bit to be set. Was this
-fixed recently?
-
-### Network.framework
-
-TODO: figure out how this works
 
 ## Windows
 
