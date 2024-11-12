@@ -1186,14 +1186,6 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
                 <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-apple" class="internal xref">Apple</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.1">
-                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="auto internal xref">3.2.1</a>.  <a href="#name-on-a-per-socket-basis" class="internal xref">On a per-socket basis</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.2">
-                    <p id="section-toc.1-1.3.2.2.2.2.1"><a href="#section-3.2.2" class="auto internal xref">3.2.2</a>.  <a href="#name-networkframework" class="internal xref">Network.framework</a></p>
-</li>
-                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
                 <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-windows" class="internal xref">Windows</a></p>
@@ -1284,33 +1276,17 @@ IPPROTO_IPV6 level.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
         <h3 id="name-apple">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-apple" class="section-name selfRef">Apple</a>
         </h3>
-<div id="on-a-per-socket-basis">
-<section id="section-3.2.1">
-          <h4 id="name-on-a-per-socket-basis">
-<a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-on-a-per-socket-basis" class="section-name selfRef">On a per-socket basis</a>
-          </h4>
-<p id="section-3.2.1-1">For IPv4, Apple platforms use the socket option of level IPPROTO_IP with name
+<p id="section-3.2-1">For IPv4, Apple platforms use the socket option of level IPPROTO_IP with name
 IP_DONTFRAG with value 1. For IPv6, IPV6_DONTFRAG with value 1 is used for the
-IPPROTO_IPV6 level.<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.1-2">However, dual-stack sockets are handled differently: To open a dual-stack socket,
+IPPROTO_IPV6 level.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">However, dual-stack sockets are handled differently: To open a dual-stack socket,
 an IPv6 socket needs to be opened and the IPV6_V6ONLY option needs to be set to
 0. This enables the socket to send both IPv4 and IPv6 packets. IPv4 packets must
-be sent using an IPv4-mapped IPv6 address.<a href="#section-3.2.1-2" class="pilcrow">¶</a></p>
-<p id="section-3.2.1-3">When using a dual-stack socket, it is only necessary (and possible) to set the
+be sent using an IPv4-mapped IPv6 address.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">When using a dual-stack socket, it is only necessary (and possible) to set the
 IPV6_DONTFRAG socket option. This results in the DF bit being set when sending
-IPv4 packets.<a href="#section-3.2.1-3" class="pilcrow">¶</a></p>
-<p id="section-3.2.1-4">TODO: I remember that IPV6_DONTFRAG didn't cause the DF bit to be set. Was this
-fixed recently?<a href="#section-3.2.1-4" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="networkframework">
-<section id="section-3.2.2">
-          <h4 id="name-networkframework">
-<a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-networkframework" class="section-name selfRef">Network.framework</a>
-          </h4>
-<p id="section-3.2.2-1">TODO: figure out how this works<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
-</section>
-</div>
+IPv4 packets. It is not possible to control the fragmentation behavior of IPv4
+and IPv6 separately.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="windows">
