@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-10T00:28:40.690956+00:00",
+  "timestamp": "2024-11-12T00:25:58.965335+00:00",
   "repo": "marten-seemann/draft-seemann-tsvwg-udp-df",
   "labels": [
     {
@@ -50,5 +50,62 @@
     }
   ],
   "issues": [],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDONMXNnM6Bbxd0",
+      "title": "ci: add a workflow that builds and runs the code",
+      "url": "https://github.com/marten-seemann/draft-seemann-tsvwg-udp-df/pull/1",
+      "state": "MERGED",
+      "author": "marten-seemann",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-11-10T17:28:02Z",
+      "updatedAt": "2024-11-10T17:40:19Z",
+      "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-df",
+      "baseRefName": "main",
+      "baseRefOid": "b49600ff8b5a727c38f33787ecfa7334d1fa5f9d",
+      "headRepository": "marten-seemann/draft-seemann-tsvwg-udp-df",
+      "headRefName": "ci",
+      "headRefOid": "54493e19333ee21ead14b3f65c98aa4c880b7bf4",
+      "closedAt": "2024-11-10T17:40:19Z",
+      "mergedAt": "2024-11-10T17:40:19Z",
+      "mergedBy": "marten-seemann",
+      "mergeCommit": {
+        "oid": "3a54764a4eb6b1cc9ea0142b789f357a5eaa72b4"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 2,
+      "id": "PR_kwDONMXNnM6BbzbT",
+      "title": "explain how IP fragmentation works on macOS",
+      "url": "https://github.com/marten-seemann/draft-seemann-tsvwg-udp-df/pull/2",
+      "state": "MERGED",
+      "author": "marten-seemann",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-11-10T17:52:13Z",
+      "updatedAt": "2024-11-10T18:34:11Z",
+      "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-df",
+      "baseRefName": "main",
+      "baseRefOid": "3a54764a4eb6b1cc9ea0142b789f357a5eaa72b4",
+      "headRepository": "marten-seemann/draft-seemann-tsvwg-udp-df",
+      "headRefName": "macos",
+      "headRefOid": "a65f05b1a2c967ddeea30cc4aa750b95e2b1016c",
+      "closedAt": "2024-11-10T18:34:11Z",
+      "mergedAt": "2024-11-10T18:34:11Z",
+      "mergedBy": "marten-seemann",
+      "mergeCommit": {
+        "oid": "03376701dafdf28d20520fea0195058d419b4921"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
