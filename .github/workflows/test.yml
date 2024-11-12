@@ -26,7 +26,10 @@ jobs:
       - name: Run IPv4 test
         run: |
           sudo tcpdump -i any -n -v 'port 12345' &
+          sleep 1  # Give tcpdump time to start up
           sudo ./main ipv4
+          sleep 1  # Give tcpdump time to capture final packets
+          sudo pkill tcpdump
       - name: Run IPv6 test
         run: |
           sudo tcpdump -i any -n -v 'port 12345' &
