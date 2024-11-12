@@ -6,7 +6,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     name: Test on ${{ matrix.os }}
     steps:
@@ -17,6 +17,12 @@ jobs:
       - name: Compile code (macOS)
         if: matrix.os == 'macos-latest'
         run: gcc -D__APPLE_USE_RFC_3542 code/main.c -o main
+      - name: Setup Windows build environment
+        if: matrix.os == 'windows-latest'
+        uses: ilammy/msvc-dev-cmd@v1
+      - name: Compile code (Windows)
+        if: matrix.os == 'windows-latest'
+        run: cl code/main.c /Fe:main ws2_32.lib
       - name: Run IPv4 test
         run: ./main ipv4
       - name: Run IPv6 test
