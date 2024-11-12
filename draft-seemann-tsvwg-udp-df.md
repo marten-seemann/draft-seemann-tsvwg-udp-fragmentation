@@ -85,8 +85,6 @@ IPPROTO_IPV6 level.
 
 For dual-stack sockets, both socket options can be set independently.
 
-works on dual-stack sockets: yes
-
 ## Apple
 
 ### On a per-socket basis
@@ -113,14 +111,14 @@ TODO: figure out how this works
 
 ## Windows
 
-IPv4: IP_DONTFRAG, 1
+For IPv4, Windows uses the socket option of level IPPROTO_IP with name
+IP_DONTFRAGMENT with value 1. For IPv6, IPV6_DONTFRAG with value 1 is used for
+the IPPROTO_IPV6 level.
 
-IPv6: IPV6_DONTFRAG, 1
-
-works on dual-stack sockets: yes. TODO: double check the above
-
-When sending a too large packet, a WSAEMSGSIZE error is returned. TODO: figure
-out what exactly triggers this error
+Similar to the Apple platforms, dual-stack sockets are IPv6 sockets with the
+IPV6_V6ONLY option set to 0. IPv4 packets must be sent using an IPv4-mapped
+IPv6 address. However, contractary to Apple platforms, the DF bit on IPv4
+packets is controlled by the IP_DONTFRAGMENT socket option.
 
 
 # Security Considerations
