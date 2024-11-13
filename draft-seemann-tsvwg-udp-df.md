@@ -27,8 +27,11 @@ informative:
 
 --- abstract
 
-TODO Abstract
-
+When performing Path MTU Discovery (PMTUD) over UDP, applications must prevent
+fragmentation of UDP datagrams both by the sender's kernel and during network
+transit. This document provides guidance for implementers on configuring socket
+options to prevent fragmentation of IPv4 and IPv6 packets across commonly used
+platforms.
 
 --- middle
 
@@ -44,7 +47,9 @@ kernel handles Path MTU Discovery (PMTUD) internally. Applications using TCP
 sockets do not need to interact with the DF bit directly.
 
 In IPv6 ({{!RFC8200}}), fragmentation by intermediate nodes is not permitted.
-All IPv6 packets effectively have the DF bit set.
+All IPv6 packets effectively have the DF bit set, however, the endpoint's kernel
+might still break up UDP datagrams that are too large to fit the MTU of the
+interface before sending a packet into the network.
 
 {{!RFC8899}} defines Datagram Packetization Layer Path MTU Discovery (DPLPMTUD),
 a mechanism that allows protocols running over UDP to determine the maximum
@@ -52,9 +57,9 @@ packet size they can send. Setting the DF bit is crucial for DPLPMTUD, as it
 ensures that packets larger than the Path MTU are dropped, allowing the endpoint
 to detect the MTU limitation.
 
-QUIC {{!RFC9000}} is one such protocol that runs over UDP and requires DPLPMTUD.
-As QUIC implementations typically run in user space, they need to configure the
-DF bit on their UDP sockets to perform DPLPMTUD correctly.
+QUIC {{!RFC9000}} is one such protocol that runs over UDP and make use of
+DPLPMTUD. As QUIC implementations typically run in user space, they need to
+configure the DF bit on their UDP sockets to perform DPLPMTUD correctly.
 
 This document provides guidance for implementers on how to set the DF bit on UDP
 sockets across different platforms.
