@@ -1,6 +1,6 @@
-# Configuring UDP Sockets for Don't Fragment for Common Platforms
+# Controlling IP Fragmentation on Common Platforms
 
-This is the working area for the individual Internet-Draft, "Configuring UDP Sockets for Don't Fragment for Common Platforms".
+This is the working area for the individual Internet-Draft, "Controlling IP Fragmentation on Common Platforms".
 
 * [Editor's Copy](https://marten-seemann.github.io/draft-seemann-tsvwg-udp-df/#go.draft-seemann-tsvwg-udp-df.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-seemann-tsvwg-udp-df)
