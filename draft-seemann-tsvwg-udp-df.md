@@ -1,6 +1,6 @@
 ---
 
-title: "Configuring UDP Sockets for Don't Fragment for Common Platforms"
+title: "Controlling IP Fragmentation on Common Platforms"
 abbrev: "UDP-DF"
 category: info
 
@@ -13,7 +13,10 @@ v: 3
 area: "Web and Internet Transport"
 workgroup: "Transport and Services Working Group"
 keyword:
+ - IP fragmentation
  - Don't Fragment
+ - Path MTU Discovery
+ - DPLPMTUD
 
 author:
  -
