@@ -7,7 +7,11 @@
 <title>Configuring UDP Sockets for Don't Fragment for Common Platforms</title>
 <meta content="Marten Seemann" name="author">
 <meta content="
-       TODO Abstract 
+       When performing Path MTU Discovery (PMTUD) over UDP, applications must prevent
+fragmentation of UDP datagrams both by the sender's kernel and during network
+transit. This document provides guidance for implementers on configuring socket
+options to prevent fragmentation of IPv4 and IPv6 packets across commonly used
+platforms. 
     " name="description">
 <meta content="xml2rfc 3.24.0" name="generator">
 <meta content="Don't Fragment" name="keyword">
@@ -1081,7 +1085,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Seemann</td>
-<td class="center">Expires 16 May 2025</td>
+<td class="center">Expires 17 May 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1094,12 +1098,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-seemann-tsvwg-udp-df-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-11-12" class="published">12 November 2024</time>
+<time datetime="2024-11-13" class="published">13 November 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-05-16">16 May 2025</time></dd>
+<dd class="expires"><time datetime="2025-05-17">17 May 2025</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1111,7 +1115,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Configuring UDP Sockets for Don't Fragment for Common Platforms</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">TODO Abstract<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">When performing Path MTU Discovery (PMTUD) over UDP, applications must prevent
+fragmentation of UDP datagrams both by the sender's kernel and during network
+transit. This document provides guidance for implementers on configuring socket
+options to prevent fragmentation of IPv4 and IPv6 packets across commonly used
+platforms.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
@@ -1143,7 +1151,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 16 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 17 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1224,15 +1232,17 @@ an ICMP "fragmentation needed" message back to the sender.<a href="#section-1-1"
 kernel handles Path MTU Discovery (PMTUD) internally. Applications using TCP
 sockets do not need to interact with the DF bit directly.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">In IPv6 (<span>[<a href="#RFC8200" class="cite xref">RFC8200</a>]</span>), fragmentation by intermediate nodes is not permitted.
-All IPv6 packets effectively have the DF bit set.<a href="#section-1-3" class="pilcrow">¶</a></p>
+All IPv6 packets effectively have the DF bit set, however, the endpoint's kernel
+might still break up UDP datagrams that are too large to fit the MTU of the
+interface before sending a packet into the network.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4"><span>[<a href="#RFC8899" class="cite xref">RFC8899</a>]</span> defines Datagram Packetization Layer Path MTU Discovery (DPLPMTUD),
 a mechanism that allows protocols running over UDP to determine the maximum
 packet size they can send. Setting the DF bit is crucial for DPLPMTUD, as it
 ensures that packets larger than the Path MTU are dropped, allowing the endpoint
 to detect the MTU limitation.<a href="#section-1-4" class="pilcrow">¶</a></p>
-<p id="section-1-5">QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span> is one such protocol that runs over UDP and requires DPLPMTUD.
-As QUIC implementations typically run in user space, they need to configure the
-DF bit on their UDP sockets to perform DPLPMTUD correctly.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-5">QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span> is one such protocol that runs over UDP and make use of
+DPLPMTUD. As QUIC implementations typically run in user space, they need to
+configure the DF bit on their UDP sockets to perform DPLPMTUD correctly.<a href="#section-1-5" class="pilcrow">¶</a></p>
 <p id="section-1-6">This document provides guidance for implementers on how to set the DF bit on UDP
 sockets across different platforms.<a href="#section-1-6" class="pilcrow">¶</a></p>
 </section>
