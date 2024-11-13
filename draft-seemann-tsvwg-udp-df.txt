@@ -8,7 +8,7 @@ Intended status: Informational
 Expires: 17 May 2025
 
 
-    Configuring UDP Sockets for Don't Fragment for Common Platforms
+            Controlling IP Fragmentation on Common Platforms
                    draft-seemann-tsvwg-udp-df-latest
 
 Abstract
