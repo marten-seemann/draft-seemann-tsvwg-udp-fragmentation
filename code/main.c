@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef __APPLE__
+    // must be defined before including <netinet/in.h>
+    #define __APPLE_USE_RFC_3542
+#endif
 #ifdef _WIN32
     #include <winsock2.h>
     #include <ws2tcpip.h>

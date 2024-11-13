@@ -11,12 +11,9 @@ jobs:
     name: Test on ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      - name: Compile code (Linux)
-        if: matrix.os == 'ubuntu-latest'
+      - name: Compile code
+        if: matrix.os != 'windows-latest'
         run: gcc code/main.c -o main
-      - name: Compile code (macOS)
-        if: matrix.os == 'macos-latest'
-        run: gcc -D__APPLE_USE_RFC_3542 code/main.c -o main
       - name: Setup Windows build environment
         if: matrix.os == 'windows-latest'
         uses: ilammy/msvc-dev-cmd@v1
