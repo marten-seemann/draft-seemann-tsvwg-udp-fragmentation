@@ -1,10 +1,10 @@
 ---
 
 title: "Controlling IP Fragmentation on Common Platforms"
-abbrev: "UDP-DF"
+abbrev: "IP fragmentation on UDP Sockets"
 category: info
 
-docname: draft-seemann-tsvwg-udp-df-latest
+docname: draft-seemann-tsvwg-udp-fragmentation-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
