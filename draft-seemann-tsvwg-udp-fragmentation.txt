@@ -29,7 +29,8 @@ Discussion Venues
    archived at https://mailarchive.ietf.org/arch/browse/tsvwg/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/marten-seemann/draft-seemann-tsvwg-udp-df.
+   https://github.com/marten-seemann/draft-seemann-tsvwg-udp-
+   fragmentation.
 
 Status of This Memo
 
