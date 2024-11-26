@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-24T00:31:15.867096+00:00",
+  "timestamp": "2024-11-26T00:28:16.883441+00:00",
   "repo": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
   "labels": [
     {
@@ -95,6 +95,22 @@
       "body": "Similar to the ECN draft, it would be nice to have a section about Network.framework, since this is the idiomatic way to do things on macOS. We'd need the help of someone who actually understands how things work there.",
       "createdAt": "2024-11-12T22:02:43Z",
       "updatedAt": "2024-11-12T22:02:43Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 13,
+      "id": "I_kwDONMXNnM6gSByC",
+      "title": "use IP_PMTUDISC_PROBE instead of IP_PMTUDISC_DO on Linux",
+      "url": "https://github.com/marten-seemann/draft-seemann-tsvwg-udp-fragmentation/issues/13",
+      "state": "OPEN",
+      "author": "marten-seemann",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "And explain the difference between the two.",
+      "createdAt": "2024-11-25T04:41:45Z",
+      "updatedAt": "2024-11-25T04:41:45Z",
       "closedAt": null,
       "comments": []
     }
