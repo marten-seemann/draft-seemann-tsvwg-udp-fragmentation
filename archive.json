@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-28T00:28:39.751521+00:00",
+  "timestamp": "2024-12-01T00:34:45.508104+00:00",
   "repo": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
   "labels": [
     {
@@ -110,9 +110,17 @@
       "labels": [],
       "body": "And explain the difference between the two.",
       "createdAt": "2024-11-25T04:41:45Z",
-      "updatedAt": "2024-11-25T04:41:45Z",
+      "updatedAt": "2024-11-29T10:47:27Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "mxinden",
+          "authorAssociation": "NONE",
+          "body": "Maybe stating the obvious, also `IPV6_MTU_DISCOVER` `IPV6_PMTUDISC_PROBE`.\r\n\r\nIn addition, I found the following in `quinn-udp`:\r\n\r\n``` rust\r\n            // Linux's IP_PMTUDISC_PROBE allows us to operate under interface MTU rather than the\r\n            // kernel's path MTU guess, but actually disabling fragmentation requires this too. See\r\n            // __ip6_append_data in ip6_output.c.\r\n            // Set `may_fragment` to `true` if this option is not supported on the platform.\r\n            may_fragment |=\r\n                !set_socket_option_supported(&*io, libc::IPPROTO_IPV6, IPV6_DONTFRAG, OPTION_ON)?;\r\n```\r\n\r\nhttps://github.com/quinn-rs/quinn/blob/e318cc4a80436fd9fa19c02886d682c49efca185/quinn-udp/src/unix.rs#L178-L183\r\n\r\n@marten-seemann based on your experience with quic-go, is the above obsolete?",
+          "createdAt": "2024-11-29T10:47:26Z",
+          "updatedAt": "2024-11-29T10:47:26Z"
+        }
+      ]
     }
   ],
   "pulls": [
