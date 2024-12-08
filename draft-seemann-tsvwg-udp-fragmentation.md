@@ -85,13 +85,19 @@ IPv4 sockets and prevent fragmentation on IPv6 sockets.
 
 ## Linux
 
-Linux uses the socket option of level IPPROTO_IP with name IP_MTU_DISCOVER with
-value IP_PMTUDISC_DO for IPv4.
+In order to send packets larger than the observed Path MTU and to disable
+Linux's own Path MTU Discovery, one uses the socket option of level IPPROTO_IP
+with name IP_MTU_DISCOVER with value IP_PMTUDISC_PROBE for IPv4, and socket
+option of level IPPROTO_IPV6 with name IPV6_MTU_DISCOVER with value
+IPV6_PMTUDISC_PROBE for IPv6.
 
-For IPv6, IPV6_MTU_DISCOVER with a value of IPV6_PMTUDISC_DO is used for the
-IPPROTO_IPV6 level.
+In addition, to receive errors when sending packets larger than the interface
+MTU, one sets the socket option of level IPPROTO_IP with name IP_DONTFRAG
+for IPv4 and socket option of level IPPROTO_IPV6 with name IPV6_DONTFRAG on
+IPv6.
 
-For dual-stack sockets, both socket options can be set independently.
+For dual-stack sockets, both IPv4 and IPv6 socket options can be set
+independently.
 
 
 ## Apple
