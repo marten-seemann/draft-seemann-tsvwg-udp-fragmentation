@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-08T00:31:49.102919+00:00",
+  "timestamp": "2024-12-10T00:29:30.332435+00:00",
   "repo": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
   "labels": [
     {
@@ -409,6 +409,119 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDONMXNnM6EcfB0",
+      "title": "fix(linux): use IP*_PMTUDISC_PROBE and IP*_DONTFRAG",
+      "url": "https://github.com/marten-seemann/draft-seemann-tsvwg-udp-fragmentation/pull/14",
+      "state": "OPEN",
+      "author": "mxinden",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "1. Use `IP*_PMTUDISC_PROBE` instead of `IP*_PMTUDISC_DO`, in order to disable Linux's own PMTUD and to send packets larger than the observed Path MTU.\r\n2. Use `IP*_DONTFRAG` to receive errors when sending packets larger than the interface MTU.\r\n---\r\nFixes #13 \r\n\r\n@marten-seemann and @ralith this is my understanding of the socket options. Thoughts?",
+      "createdAt": "2024-12-08T15:00:37Z",
+      "updatedAt": "2024-12-09T03:58:38Z",
+      "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
+      "baseRefName": "main",
+      "baseRefOid": "f240043d8c8e61476810b903e41768c479cf94d9",
+      "headRepository": "mxinden/draft-seemann-tsvwg-udp-fragmentation",
+      "headRefName": "probe",
+      "headRefOid": "d4c1bf02ed67d3e6b87fe1c3ecff9046d38cb7c2",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONMXNnM6UPeYw",
+          "commit": {
+            "abbreviatedOid": "d4c1bf0"
+          },
+          "author": "mxinden",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-08T15:01:01Z",
+          "updatedAt": "2024-12-08T15:01:01Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "Again my understanding of https://github.com/torvalds/linux/blob/e70140ba0d2b1a30467d4af6bcfe761327b9ec95/net/ipv6/ip6_output.c#L1477.\r\n\r\nI am not sure one should set it on v4.",
+              "createdAt": "2024-12-08T15:01:01Z",
+              "updatedAt": "2024-12-08T15:03:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6UQM1x",
+          "commit": {
+            "abbreviatedOid": "d4c1bf0"
+          },
+          "author": "Ralith",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-08T20:54:25Z",
+          "updatedAt": "2024-12-08T20:54:25Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "I would word this as \"to prevent fragmentation\" rather than \"to receive errors\", since fragmentation is the hazard we're specifically seeking to avoid.\r\n\r\n> I am not sure one should set it on v4.\r\n\r\nLinux doesn't have an IPv4 DONTFRAG, afaict.",
+              "createdAt": "2024-12-08T20:54:25Z",
+              "updatedAt": "2024-12-08T20:54:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6UQM3X",
+          "commit": {
+            "abbreviatedOid": "d4c1bf0"
+          },
+          "author": "Ralith",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-08T20:55:01Z",
+          "updatedAt": "2024-12-08T20:55:01Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "Also, how certain are you that `mtu` is necessarily the *interface* mtu and not some guess of the path MTU?",
+              "createdAt": "2024-12-08T20:55:01Z",
+              "updatedAt": "2024-12-08T20:55:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6URsom",
+          "commit": {
+            "abbreviatedOid": "d4c1bf0"
+          },
+          "author": "marten-seemann",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "Can you also update the code in `code/main.c`?\r\n\r\nMaybe we could use that script to figure out what IPV6_DONTFRAG does as well?",
+          "createdAt": "2024-12-09T03:55:13Z",
+          "updatedAt": "2024-12-09T03:58:38Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "Isn't this backwards? The kernel doesn't even try to observe the Path MTU if IP_PMTUDISC_PROBE is set, it only does that for IP_PMTUDISC_DO.",
+              "createdAt": "2024-12-09T03:55:13Z",
+              "updatedAt": "2024-12-09T03:58:38Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "I'm still confused about IPV6_DONTFRAG, but with IP_PMTUDISC_DO the kernel processes ICMP packets, and refuses to send packets larger than the MTU advertised in that packet. \r\n\r\nAnd since ICMP packets are not end-to-end authenticated, this was what caused https://github.com/quic-go/quic-go/security/advisories/GHSA-px8v-pp82-rcvr.",
+              "createdAt": "2024-12-09T03:57:42Z",
+              "updatedAt": "2024-12-09T03:58:38Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
