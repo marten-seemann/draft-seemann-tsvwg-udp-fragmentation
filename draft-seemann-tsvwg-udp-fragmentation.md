@@ -85,11 +85,10 @@ IPv4 sockets and prevent fragmentation on IPv6 sockets.
 
 ## Linux
 
-In order to send packets larger than the observed Path MTU and to disable
-Linux's own Path MTU Discovery, one uses the socket option of level IPPROTO_IP
-with name IP_MTU_DISCOVER with value IP_PMTUDISC_PROBE for IPv4, and socket
-option of level IPPROTO_IPV6 with name IPV6_MTU_DISCOVER with value
-IPV6_PMTUDISC_PROBE for IPv6.
+In order to disable Linux's own Path MTU Discovery, one uses the socket option
+of level IPPROTO_IP with name IP_MTU_DISCOVER with value IP_PMTUDISC_PROBE for
+IPv4, and socket option of level IPPROTO_IPV6 with name IPV6_MTU_DISCOVER with
+value IPV6_PMTUDISC_PROBE for IPv6.
 
 In addition, for IPv6, to prevent local fragmentation when sending packets
 larger than the interface MTU, one sets the socket option of level IPPROTO_IPV6
