@@ -90,12 +90,12 @@ of level IPPROTO_IP with name IP_MTU_DISCOVER with value IP_PMTUDISC_PROBE for
 IPv4, and socket option of level IPPROTO_IPV6 with name IPV6_MTU_DISCOVER with
 value IPV6_PMTUDISC_PROBE for IPv6.
 
+For dual-stack sockets, both IPv4 and IPv6 socket options can be set
+independently.
+
 In addition, for IPv6, to prevent local fragmentation when sending packets
 larger than the interface MTU, one sets the socket option of level IPPROTO_IPV6
 with name IPV6_DONTFRAG.
-
-For dual-stack sockets, both IPv4 and IPv6 socket options can be set
-independently.
 
 
 ## Apple
