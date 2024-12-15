@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-12T00:28:58.987707+00:00",
+  "timestamp": "2024-12-15T00:32:05.187579+00:00",
   "repo": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
   "labels": [
     {
@@ -123,7 +123,7 @@
       "comments": [
         {
           "author": "mxinden",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "Maybe stating the obvious, also `IPV6_MTU_DISCOVER` `IPV6_PMTUDISC_PROBE`.\r\n\r\nIn addition, I found the following in `quinn-udp`:\r\n\r\n``` rust\r\n            // Linux's IP_PMTUDISC_PROBE allows us to operate under interface MTU rather than the\r\n            // kernel's path MTU guess, but actually disabling fragmentation requires this too. See\r\n            // __ip6_append_data in ip6_output.c.\r\n            // Set `may_fragment` to `true` if this option is not supported on the platform.\r\n            may_fragment |=\r\n                !set_socket_option_supported(&*io, libc::IPPROTO_IPV6, IPV6_DONTFRAG, OPTION_ON)?;\r\n```\r\n\r\nhttps://github.com/quinn-rs/quinn/blob/e318cc4a80436fd9fa19c02886d682c49efca185/quinn-udp/src/unix.rs#L178-L183\r\n\r\n@marten-seemann based on your experience with quic-go, is the above obsolete?",
           "createdAt": "2024-11-29T10:47:26Z",
           "updatedAt": "2024-11-29T10:47:26Z"
@@ -137,7 +137,7 @@
         },
         {
           "author": "mxinden",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "It is **not** obsolete. Instead, I suggest recommending it in `3.1 Linux`. Currently it is only recommended in `3.2 Apple` and `3.3 Windows`. Does that make sense @marten-seemann?",
           "createdAt": "2024-12-02T07:50:45Z",
           "updatedAt": "2024-12-02T07:50:45Z"
@@ -417,23 +417,38 @@
       "url": "https://github.com/marten-seemann/draft-seemann-tsvwg-udp-fragmentation/pull/14",
       "state": "OPEN",
       "author": "mxinden",
-      "authorAssociation": "NONE",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "1. Use `IP*_PMTUDISC_PROBE` instead of `IP*_PMTUDISC_DO`, in order to disable Linux's own PMTUD and to send packets larger than the observed Path MTU.\r\n2. Use `IP*_DONTFRAG` to receive errors when sending packets larger than the interface MTU.\r\n---\r\nFixes #13 \r\n\r\n@marten-seemann and @ralith this is my understanding of the socket options. Thoughts?",
       "createdAt": "2024-12-08T15:00:37Z",
-      "updatedAt": "2024-12-09T03:58:38Z",
+      "updatedAt": "2024-12-13T20:35:02Z",
       "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
       "baseRefName": "main",
       "baseRefOid": "f240043d8c8e61476810b903e41768c479cf94d9",
       "headRepository": "mxinden/draft-seemann-tsvwg-udp-fragmentation",
       "headRefName": "probe",
-      "headRefOid": "d4c1bf02ed67d3e6b87fe1c3ecff9046d38cb7c2",
+      "headRefOid": "f69feb8496e7fb41b35387a373494e66c954836a",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "mxinden",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@marten-seemann can you approve the workflow, or add me as a collaborator on the repository?",
+          "createdAt": "2024-12-12T14:46:31Z",
+          "updatedAt": "2024-12-12T14:46:31Z"
+        },
+        {
+          "author": "mxinden",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thank you for the input! This is ready for another review.",
+          "createdAt": "2024-12-13T14:36:22Z",
+          "updatedAt": "2024-12-13T14:36:22Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDONMXNnM6UPeYw",
@@ -441,7 +456,7 @@
             "abbreviatedOid": "d4c1bf0"
           },
           "author": "mxinden",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-12-08T15:01:01Z",
@@ -518,6 +533,72 @@
               "body": "I'm still confused about IPV6_DONTFRAG, but with IP_PMTUDISC_DO the kernel processes ICMP packets, and refuses to send packets larger than the MTU advertised in that packet. \r\n\r\nAnd since ICMP packets are not end-to-end authenticated, this was what caused https://github.com/quic-go/quic-go/security/advisories/GHSA-px8v-pp82-rcvr.",
               "createdAt": "2024-12-09T03:57:42Z",
               "updatedAt": "2024-12-09T03:58:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6VABq_",
+          "commit": {
+            "abbreviatedOid": "d4c1bf0"
+          },
+          "author": "mxinden",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-12T14:26:25Z",
+          "updatedAt": "2024-12-12T14:26:25Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "> Also, how certain are you that `mtu` is necessarily the _interface_ mtu and not some guess of the path MTU?\r\n\r\nAccording to https://man7.org/linux/man-pages/man7/ip.7.html:\r\n\r\n```\r\n              Path MTU discovery value   Meaning\r\n              IP_PMTUDISC_WANT           Use per-route settings.\r\n              IP_PMTUDISC_DONT           Never do Path MTU Discovery.\r\n              IP_PMTUDISC_DO             Always do Path MTU Discovery.\r\n              IP_PMTUDISC_PROBE          Set DF but ignore Path MTU.\r\n```\r\n\r\nThus I assume with `IP_PMTUDISC_PROBE` the path MTU is always ignored. Does that make sense @Ralith?",
+              "createdAt": "2024-12-12T14:26:25Z",
+              "updatedAt": "2024-12-12T14:26:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6VCrEi",
+          "commit": {
+            "abbreviatedOid": "d4c1bf0"
+          },
+          "author": "Ralith",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-12T18:40:49Z",
+          "updatedAt": "2024-12-12T18:40:49Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": ":+1: ",
+              "createdAt": "2024-12-12T18:40:49Z",
+              "updatedAt": "2024-12-12T18:40:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6VM-Uf",
+          "commit": {
+            "abbreviatedOid": "f69feb8"
+          },
+          "author": "Ralith",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-13T20:34:32Z",
+          "updatedAt": "2024-12-13T20:35:02Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\nFor dual-stack sockets, both IPv4 and IPv6 socket options should be set\r\n```",
+              "createdAt": "2024-12-13T20:34:32Z",
+              "updatedAt": "2024-12-13T20:35:02Z"
+            },
+            {
+              "originalPosition": 18,
+              "body": "```suggestion\r\nlarger than the interface MTU, set the socket option of level IPPROTO_IPV6\r\n```",
+              "createdAt": "2024-12-13T20:34:52Z",
+              "updatedAt": "2024-12-13T20:35:02Z"
             }
           ]
         }
