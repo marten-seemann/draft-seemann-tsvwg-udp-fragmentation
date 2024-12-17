@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-15T00:32:05.187579+00:00",
+  "timestamp": "2024-12-17T00:29:06.737471+00:00",
   "repo": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
   "labels": [
     {
@@ -422,13 +422,13 @@
       "labels": [],
       "body": "1. Use `IP*_PMTUDISC_PROBE` instead of `IP*_PMTUDISC_DO`, in order to disable Linux's own PMTUD and to send packets larger than the observed Path MTU.\r\n2. Use `IP*_DONTFRAG` to receive errors when sending packets larger than the interface MTU.\r\n---\r\nFixes #13 \r\n\r\n@marten-seemann and @ralith this is my understanding of the socket options. Thoughts?",
       "createdAt": "2024-12-08T15:00:37Z",
-      "updatedAt": "2024-12-13T20:35:02Z",
+      "updatedAt": "2024-12-16T20:22:01Z",
       "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
       "baseRefName": "main",
       "baseRefOid": "f240043d8c8e61476810b903e41768c479cf94d9",
       "headRepository": "mxinden/draft-seemann-tsvwg-udp-fragmentation",
       "headRefName": "probe",
-      "headRefOid": "f69feb8496e7fb41b35387a373494e66c954836a",
+      "headRefOid": "a0d071d3eda9a9acb61338abacfbaf8c29f2d532",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -599,6 +599,132 @@
               "body": "```suggestion\r\nlarger than the interface MTU, set the socket option of level IPPROTO_IPV6\r\n```",
               "createdAt": "2024-12-13T20:34:52Z",
               "updatedAt": "2024-12-13T20:35:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6VVFV9",
+          "commit": {
+            "abbreviatedOid": "f69feb8"
+          },
+          "author": "marten-seemann",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-16T07:19:26Z",
+          "updatedAt": "2024-12-16T07:19:26Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "\"should be set independently\" doesn't make a lot of sense to me. I think \"can\" as better, as we want to point out that on Linux, one does not influence the other (this is different on macOS, for example).",
+              "createdAt": "2024-12-16T07:19:26Z",
+              "updatedAt": "2024-12-16T07:19:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6VVF_2",
+          "commit": {
+            "abbreviatedOid": "f69feb8"
+          },
+          "author": "marten-seemann",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-16T07:21:18Z",
+          "updatedAt": "2024-12-16T07:25:44Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "Doesn't IPV6_PMTUDISC_PROBE already do that?",
+              "createdAt": "2024-12-16T07:21:18Z",
+              "updatedAt": "2024-12-16T07:25:44Z"
+            },
+            {
+              "originalPosition": 6,
+              "body": "I don't think Linux runs PMTUD on its own, in the sense that it sends probe packets on its own. Even with IP_PMTUDISC_DO, it would still be the application's responsibility to send a probe packet, the Linux kernel would just update its MTU tracking for this 4-tuple when it receives an ICMP packet.\r\n\r\nTherefore, I'd prefer to say something like this:\r\n1. IP_PMTUDISC_DO turns on the DF bit, and enables the processing of ICMP packets by the kernel\r\n2. IP_PMTUDISC_PROBE turns on the DF bit, and disables the processing of ICMP packets by the kernel\r\n\r\nWe can then point out that IP_PMTUDISC_DO is problematic from a security standpoint (and maybe cite the draft in dnsops?).",
+              "createdAt": "2024-12-16T07:25:41Z",
+              "updatedAt": "2024-12-16T07:25:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6VXZnv",
+          "commit": {
+            "abbreviatedOid": "f69feb8"
+          },
+          "author": "mxinden",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-16T11:36:51Z",
+          "updatedAt": "2024-12-16T11:36:51Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "My initial version described the error reporting of `IPV6_DONTFRAG` only. @Ralith suggested the \"prevent [local] fragmentation\" in https://github.com/marten-seemann/draft-seemann-tsvwg-udp-fragmentation/pull/14#discussion_r1875042458.",
+              "createdAt": "2024-12-16T11:36:51Z",
+              "updatedAt": "2024-12-16T11:36:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6VXhBD",
+          "commit": {
+            "abbreviatedOid": "f69feb8"
+          },
+          "author": "marten-seemann",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-16T11:52:14Z",
+          "updatedAt": "2024-12-16T11:52:14Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "Don't both of them return an error? Does of them just silently swallow packets if the kernel believes they're too large?",
+              "createdAt": "2024-12-16T11:52:14Z",
+              "updatedAt": "2024-12-16T11:52:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6VXiaO",
+          "commit": {
+            "abbreviatedOid": "f69feb8"
+          },
+          "author": "mxinden",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-16T11:54:58Z",
+          "updatedAt": "2024-12-16T11:54:58Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "@marten-seemann what do you think of [a0d071d](https://github.com/marten-seemann/draft-seemann-tsvwg-udp-fragmentation/pull/14/commits/a0d071d3eda9a9acb61338abacfbaf8c29f2d532)?\r\n\r\n\r\n\r\n> We can then point out that IP_PMTUDISC_DO is problematic from a security standpoint (and maybe cite the draft in dnsops?).\r\n\r\nAre you referring to https://datatracker.ietf.org/doc/draft-ietf-dnsop-avoid-fragmentation/ ? I don't see it describing the attack, nor the socket options in depth. Am I missing something?",
+              "createdAt": "2024-12-16T11:54:58Z",
+              "updatedAt": "2024-12-16T11:54:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6Vchwi",
+          "commit": {
+            "abbreviatedOid": "f69feb8"
+          },
+          "author": "Ralith",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-16T20:22:01Z",
+          "updatedAt": "2024-12-16T20:22:01Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "I think you're right grammatically. My concern is that \"can\" fails to actually recommend that people do so.",
+              "createdAt": "2024-12-16T20:22:01Z",
+              "updatedAt": "2024-12-16T20:22:01Z"
             }
           ]
         }
