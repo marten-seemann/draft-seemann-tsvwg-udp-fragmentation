@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-17T00:29:06.737471+00:00",
+  "timestamp": "2024-12-19T00:28:24.014585+00:00",
   "repo": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
   "labels": [
     {
@@ -422,7 +422,7 @@
       "labels": [],
       "body": "1. Use `IP*_PMTUDISC_PROBE` instead of `IP*_PMTUDISC_DO`, in order to disable Linux's own PMTUD and to send packets larger than the observed Path MTU.\r\n2. Use `IP*_DONTFRAG` to receive errors when sending packets larger than the interface MTU.\r\n---\r\nFixes #13 \r\n\r\n@marten-seemann and @ralith this is my understanding of the socket options. Thoughts?",
       "createdAt": "2024-12-08T15:00:37Z",
-      "updatedAt": "2024-12-16T20:22:01Z",
+      "updatedAt": "2024-12-17T10:06:40Z",
       "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
       "baseRefName": "main",
       "baseRefOid": "f240043d8c8e61476810b903e41768c479cf94d9",
@@ -725,6 +725,26 @@
               "body": "I think you're right grammatically. My concern is that \"can\" fails to actually recommend that people do so.",
               "createdAt": "2024-12-16T20:22:01Z",
               "updatedAt": "2024-12-16T20:22:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6Vg1JA",
+          "commit": {
+            "abbreviatedOid": "f69feb8"
+          },
+          "author": "mxinden",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-17T10:06:40Z",
+          "updatedAt": "2024-12-17T10:06:40Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "> Does of them just silently swallow packets if the kernel believes they're too large?\r\n\r\nThat is my understanding of the code below, yes:\r\n\r\nhttps://github.com/torvalds/linux/blob/master/net/ipv6/ip6_output.c#L1477",
+              "createdAt": "2024-12-17T10:06:40Z",
+              "updatedAt": "2024-12-17T10:06:40Z"
             }
           ]
         }
