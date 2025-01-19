@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-16T00:26:30.932143+00:00",
+  "timestamp": "2025-01-19T00:28:38.510436+00:00",
   "repo": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
   "labels": [
     {
@@ -422,7 +422,7 @@
       "labels": [],
       "body": "1. Use `IP*_PMTUDISC_PROBE` instead of `IP*_PMTUDISC_DO`, in order to disable Linux's own PMTUD and to send packets larger than the observed Path MTU.\r\n2. Use `IP*_DONTFRAG` to receive errors when sending packets larger than the interface MTU.\r\n---\r\nFixes #13 \r\n\r\n@marten-seemann and @ralith this is my understanding of the socket options. Thoughts?",
       "createdAt": "2024-12-08T15:00:37Z",
-      "updatedAt": "2024-12-17T10:06:40Z",
+      "updatedAt": "2025-01-18T19:13:03Z",
       "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
       "baseRefName": "main",
       "baseRefOid": "f240043d8c8e61476810b903e41768c479cf94d9",
@@ -745,6 +745,46 @@
               "body": "> Does of them just silently swallow packets if the kernel believes they're too large?\r\n\r\nThat is my understanding of the code below, yes:\r\n\r\nhttps://github.com/torvalds/linux/blob/master/net/ipv6/ip6_output.c#L1477",
               "createdAt": "2024-12-17T10:06:40Z",
               "updatedAt": "2024-12-17T10:06:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6YnmMt",
+          "commit": {
+            "abbreviatedOid": "a0d071d"
+          },
+          "author": "mxinden",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-18T19:12:09Z",
+          "updatedAt": "2025-01-18T19:12:09Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "@marten-seemann with the above, how do you want to proceed?",
+              "createdAt": "2025-01-18T19:12:09Z",
+              "updatedAt": "2025-01-18T19:12:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6YnmOv",
+          "commit": {
+            "abbreviatedOid": "f69feb8"
+          },
+          "author": "mxinden",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-18T19:13:03Z",
+          "updatedAt": "2025-01-18T19:13:03Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Friendly ping @marten-seemann. Thoughts on the new commit? Which \"dnsops draft\" are you referring to?",
+              "createdAt": "2025-01-18T19:13:03Z",
+              "updatedAt": "2025-01-18T19:13:03Z"
             }
           ]
         }
