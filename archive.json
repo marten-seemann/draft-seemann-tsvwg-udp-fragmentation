@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-13T00:26:55.642483+00:00",
+  "timestamp": "2025-02-16T00:29:47.416774+00:00",
   "repo": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
   "labels": [
     {
@@ -422,7 +422,7 @@
       "labels": [],
       "body": "1. Use `IP*_PMTUDISC_PROBE` instead of `IP*_PMTUDISC_DO`, in order to disable Linux's own PMTUD and to send packets larger than the observed Path MTU.\r\n2. Use `IP*_DONTFRAG` to receive errors when sending packets larger than the interface MTU.\r\n---\r\nFixes #13 \r\n\r\n@marten-seemann and @ralith this is my understanding of the socket options. Thoughts?",
       "createdAt": "2024-12-08T15:00:37Z",
-      "updatedAt": "2025-01-18T19:13:03Z",
+      "updatedAt": "2025-02-15T05:54:04Z",
       "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
       "baseRefName": "main",
       "baseRefOid": "f240043d8c8e61476810b903e41768c479cf94d9",
@@ -785,6 +785,46 @@
               "body": "Friendly ping @marten-seemann. Thoughts on the new commit? Which \"dnsops draft\" are you referring to?",
               "createdAt": "2025-01-18T19:13:03Z",
               "updatedAt": "2025-01-18T19:13:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6cH4UE",
+          "commit": {
+            "abbreviatedOid": "a0d071d"
+          },
+          "author": "marten-seemann",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-15T04:56:31Z",
+          "updatedAt": "2025-02-15T04:56:31Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "I tried this out, and I found that the kernel rejects packets larger than the interface MTU for both IPV6_PMTUDISC_PROBE and IPV6_PMTUDISC_DO, so it seems like IPV6_DONTFRAG is not needed at all.\r\n\r\nIPv6 fragmentation only happens if neither IPV6_PMTUDISC_PROBE or IPV6_PMTUDISC_DO is set.\r\n\r\nHowever, here's an interesting thing: If I bump the interface MTU beyond 1500 bytes, and try to send a 1600 bytes packet, I immediately (without having sent any packet / received any ICMP packet) get a \"message too large\" error when using IPV6_PMTUDISC_DO (IPV6_PMTUDISC_PROBE sends the large packet). I don't have any explanation why that happens.\r\n\r\nWhen IPV6_PMTUDISC_PROBE is set, I only receive a \"message too large\" error if the packet size exceeds the interface MTU.",
+              "createdAt": "2025-02-15T04:56:31Z",
+              "updatedAt": "2025-02-15T04:56:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6cH9sT",
+          "commit": {
+            "abbreviatedOid": "a0d071d"
+          },
+          "author": "marten-seemann",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-15T05:54:03Z",
+          "updatedAt": "2025-02-15T05:54:04Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "My understanding is IPV6_DONTFRAG only has any impact when IPV6_PMTUDISC_DONT is used. Since we're not concerned with that, I think we can remove this sentence.",
+              "createdAt": "2025-02-15T05:54:03Z",
+              "updatedAt": "2025-02-15T05:54:04Z"
             }
           ]
         }
