@@ -98,10 +98,6 @@ use IP_PMTUDISC_PROBE and IPV6_PMTUDISC_PROBE.
 For dual-stack sockets, both IPv4 and IPv6 socket options can be set
 independently.
 
-In addition, for IPv6, to prevent local fragmentation when sending packets
-larger than the interface MTU, set the socket option of level IPPROTO_IPV6 with
-name IPV6_DONTFRAG.
-
 
 ## Apple
 
