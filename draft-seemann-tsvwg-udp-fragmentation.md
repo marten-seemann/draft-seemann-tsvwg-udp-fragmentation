@@ -92,8 +92,8 @@ packets by the kernel. A value of IP_PMTUDISC_PROBE and IPV6_PMTUDISC_PROBE
 turns on the DF bit, and disables the processing of ICMP packets by the kernel.
 
 Given that IP_PMTUDISC_DO and IPV6_PMTUDISC_DO prevent sending datagrams larger
-than the observed path MTU and are prone to ICMP NEEDFRAG attacks, one should
-use IP_PMTUDISC_PROBE and IPV6_PMTUDISC_PROBE.
+than the observed path MTU and are prone to the Blind Performance-Degrading
+attack ({{!RFC5927}}), one should use IP_PMTUDISC_PROBE and IPV6_PMTUDISC_PROBE.
 
 For dual-stack sockets, both IPv4 and IPv6 socket options can be set
 independently.
