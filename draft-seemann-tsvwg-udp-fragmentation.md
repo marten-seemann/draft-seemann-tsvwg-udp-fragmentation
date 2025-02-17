@@ -60,7 +60,7 @@ packet size they can send. Setting the DF bit is crucial for DPLPMTUD, as it
 ensures that packets larger than the Path MTU are dropped, allowing the endpoint
 to detect the MTU limitation.
 
-QUIC {{!RFC9000}} is one such protocol that runs over UDP and make use of
+QUIC {{!RFC9000}} is one such protocol that runs over UDP and makes use of
 DPLPMTUD. As QUIC implementations typically run in user space, they need to
 configure the DF bit on their UDP sockets to perform DPLPMTUD correctly.
 
