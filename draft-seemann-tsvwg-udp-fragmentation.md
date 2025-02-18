@@ -123,7 +123,7 @@ the IPPROTO_IPV6 level.
 
 Similar to the Apple platforms, dual-stack sockets are IPv6 sockets with the
 IPV6_V6ONLY option set to 0. IPv4 packets must be sent using an IPv4-mapped
-IPv6 address. However, contractary to Apple platforms, the DF bit on IPv4
+IPv6 address. However, contrary to Apple platforms, the DF bit on IPv4
 packets is controlled by the IP_DONTFRAGMENT socket option.
 
 
