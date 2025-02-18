@@ -22,6 +22,10 @@ author:
  -
     fullname: Marten Seemann
     email: martenseemann@gmail.com
+ -
+    fullname: Max Inden
+    organization: Mozilla
+    email: mail@max-inden.de
 
 normative:
 
