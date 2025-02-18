@@ -3,9 +3,10 @@
 
 
 Transport and Services Working Group                          M. Seemann
-Internet-Draft                                          18 February 2025
-Intended status: Informational                                          
-Expires: 22 August 2025
+Internet-Draft                                                          
+Intended status: Informational                                  M. Inden
+Expires: 22 August 2025                                          Mozilla
+                                                        18 February 2025
 
 
             Controlling IP Fragmentation on Common Platforms
@@ -75,7 +76,7 @@ Table of Contents
    5.  IANA Considerations
    6.  Normative References
    Acknowledgments
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
@@ -215,7 +216,12 @@ Acknowledgments
 
    TODO acknowledge.
 
-Author's Address
+Authors' Addresses
 
    Marten Seemann
    Email: martenseemann@gmail.com
+
+
+   Max Inden
+   Mozilla
+   Email: mail@max-inden.de

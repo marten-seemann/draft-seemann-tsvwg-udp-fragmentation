@@ -6,6 +6,7 @@
 <meta content="initial-scale=1.0" name="viewport">
 <title>Controlling IP Fragmentation on Common Platforms</title>
 <meta content="Marten Seemann" name="author">
+<meta content="Max Inden" name="author">
 <meta content="
        When performing Path MTU Discovery (PMTUD) over UDP, applications must prevent
 fragmentation of UDP datagrams both by the sender's kernel and during network
@@ -1054,7 +1055,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <td class="right">February 2025</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">Seemann</td>
+<td class="left">Seemann &amp; Inden</td>
 <td class="center">Expires 22 August 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
@@ -1074,10 +1075,14 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
 <dd class="expires"><time datetime="2025-08-22">22 August 2025</time></dd>
-<dt class="label-authors">Author:</dt>
+<dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
       <div class="author-name">M. Seemann</div>
+</div>
+<div class="author">
+      <div class="author-name">M. Inden</div>
+<div class="org">Mozilla</div>
 </div>
 </dd>
 </dl>
@@ -1183,7 +1188,7 @@ platforms.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
             <p id="section-toc.1-1.7.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1348,14 +1353,22 @@ packets is controlled by the IP_DONTFRAGMENT socket option.<a href="#section-3.3
 </div>
 <div id="authors-addresses">
 <section id="appendix-B">
-      <h2 id="name-authors-address">
-<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Marten Seemann</span></div>
 <div class="email">
 <span>Email:</span>
 <a href="mailto:martenseemann@gmail.com" class="email">martenseemann@gmail.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Max Inden</span></div>
+<div dir="auto" class="left"><span class="org">Mozilla</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:mail@max-inden.de" class="email">mail@max-inden.de</a>
 </div>
 </address>
 </section>
