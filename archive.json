@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-16T00:29:47.416774+00:00",
+  "timestamp": "2025-02-18T00:26:44.727874+00:00",
   "repo": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
   "labels": [
     {
@@ -413,7 +413,7 @@
     {
       "number": 14,
       "id": "PR_kwDONMXNnM6EcfB0",
-      "title": "fix(linux): use IP*_PMTUDISC_PROBE and IP*_DONTFRAG",
+      "title": "fix(linux): use IP*_PMTUDISC_PROBE",
       "url": "https://github.com/marten-seemann/draft-seemann-tsvwg-udp-fragmentation/pull/14",
       "state": "OPEN",
       "author": "mxinden",
@@ -422,13 +422,13 @@
       "labels": [],
       "body": "1. Use `IP*_PMTUDISC_PROBE` instead of `IP*_PMTUDISC_DO`, in order to disable Linux's own PMTUD and to send packets larger than the observed Path MTU.\r\n2. Use `IP*_DONTFRAG` to receive errors when sending packets larger than the interface MTU.\r\n---\r\nFixes #13 \r\n\r\n@marten-seemann and @ralith this is my understanding of the socket options. Thoughts?",
       "createdAt": "2024-12-08T15:00:37Z",
-      "updatedAt": "2025-02-15T05:54:04Z",
+      "updatedAt": "2025-02-17T15:57:00Z",
       "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
       "baseRefName": "main",
       "baseRefOid": "f240043d8c8e61476810b903e41768c479cf94d9",
       "headRepository": "mxinden/draft-seemann-tsvwg-udp-fragmentation",
       "headRefName": "probe",
-      "headRefOid": "a0d071d3eda9a9acb61338abacfbaf8c29f2d532",
+      "headRefOid": "e9edf300bd164acf6655a0ff83c7ef67f3e8fddf",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -827,8 +827,146 @@
               "updatedAt": "2025-02-15T05:54:04Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6cPO-E",
+          "commit": {
+            "abbreviatedOid": "f69feb8"
+          },
+          "author": "mxinden",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-17T14:33:23Z",
+          "updatedAt": "2025-02-17T14:33:23Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "Thanks for testing @marten-seemann.\r\n\r\n> However, here's an interesting thing: If I bump the interface MTU beyond 1500 bytes, and try to send a 1600 bytes packet, I immediately (without having sent any packet / received any ICMP packet) get a \"message too large\" error when using IPV6_PMTUDISC_DO (IPV6_PMTUDISC_PROBE sends the large packet). I don't have any explanation why that happens.\r\n\r\n:open_mouth: \r\n\r\nI guess with recommending `IPV6_PMTUDISC_PROBE`, the above is of no concern to us.\r\n\r\n> My understanding is IPV6_DONTFRAG only has any impact when IPV6_PMTUDISC_DONT is used. Since we're not concerned with that, I think we can remove this sentence.\r\n\r\nAgreed. Removed. See https://github.com/marten-seemann/draft-seemann-tsvwg-udp-fragmentation/pull/14/commits/1bff50bed934c7f2164a2d5ccae644cd050db7a0.",
+              "createdAt": "2025-02-17T14:33:23Z",
+              "updatedAt": "2025-02-17T14:33:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6cPhhT",
+          "commit": {
+            "abbreviatedOid": "f69feb8"
+          },
+          "author": "marten-seemann",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-17T15:03:38Z",
+          "updatedAt": "2025-02-17T15:03:39Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "I think it's an RFC now: https://datatracker.ietf.org/doc/rfc9715/",
+              "createdAt": "2025-02-17T15:03:38Z",
+              "updatedAt": "2025-02-17T15:03:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6cP5dF",
+          "commit": {
+            "abbreviatedOid": "f69feb8"
+          },
+          "author": "mxinden",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-17T15:45:27Z",
+          "updatedAt": "2025-02-17T15:45:28Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "I don't think RFC 9715 is a good source to link. It does mention the ICMP NEEDFRAG attack, but neither provides details, nor does it link to a more detailed description.\r\n\r\n> By comparison, the TCP protocol stack controls packet size and avoids IP fragmentation under ICMP NEEDFRAG attacks.\r\n\r\nhttps://www.rfc-editor.org/rfc/rfc9715.html#section-7.3\r\n\r\nInstead, I found the attack described in RFC 5927, albeit under a different name, i.e. _Blind Performance-Degrading Attack_.\r\n\r\n> As discussed in both [[RFC1191](https://www.rfc-editor.org/rfc/rfc1191)] and [[RFC1981](https://www.rfc-editor.org/rfc/rfc1981)], the Path-MTU Discovery\r\n   mechanism can be used to attack TCP.  An attacker could send a\r\n   crafted ICMPv4 \"Destination Unreachable, fragmentation needed and DF\r\n   set\" packet (or their ICMPv6 counterpart) to the sending system,\r\n   advertising a small Next-Hop MTU.  As a result, the attacked system\r\n   would reduce the size of the packets it sends for the corresponding\r\n   connection accordingly.\r\n> ...\r\n\r\n\r\n\r\nhttps://www.rfc-editor.org/rfc/rfc5927.html#section-7\r\n\r\nI added a link in https://github.com/marten-seemann/draft-seemann-tsvwg-udp-fragmentation/pull/14/commits/f77c3c0034e56e27282e7ebd8520fa500b0c0661. @marten-seemann let me know what you think.",
+              "createdAt": "2025-02-17T15:45:27Z",
+              "updatedAt": "2025-02-17T15:45:28Z"
+            }
+          ]
         }
       ]
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDONMXNnM6LeMLR",
+      "title": "fix: typo contractary contrary",
+      "url": "https://github.com/marten-seemann/draft-seemann-tsvwg-udp-fragmentation/pull/16",
+      "state": "OPEN",
+      "author": "mxinden",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-02-17T14:47:52Z",
+      "updatedAt": "2025-02-17T14:47:52Z",
+      "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
+      "baseRefName": "main",
+      "baseRefOid": "f240043d8c8e61476810b903e41768c479cf94d9",
+      "headRepository": "mxinden/draft-seemann-tsvwg-udp-fragmentation",
+      "headRefName": "typo-contrary",
+      "headRefOid": "fea2f7ee3df05e9c4157047b283dc0922e80c12f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDONMXNnM6LeNKf",
+      "title": "fix: typo make makes",
+      "url": "https://github.com/marten-seemann/draft-seemann-tsvwg-udp-fragmentation/pull/17",
+      "state": "OPEN",
+      "author": "mxinden",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-02-17T14:49:36Z",
+      "updatedAt": "2025-02-17T14:49:36Z",
+      "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
+      "baseRefName": "main",
+      "baseRefOid": "f240043d8c8e61476810b903e41768c479cf94d9",
+      "headRepository": "mxinden/draft-seemann-tsvwg-udp-fragmentation",
+      "headRefName": "typo-makes",
+      "headRefOid": "e1febaae5787a8b01bbafea614c231609df5ae94",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDONMXNnM6LeTVp",
+      "title": "chore: add Max as co-author",
+      "url": "https://github.com/marten-seemann/draft-seemann-tsvwg-udp-fragmentation/pull/18",
+      "state": "OPEN",
+      "author": "mxinden",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Taking you up on the offer to become co-author.\r\n\r\nThough it should be noted that you did most of the work!",
+      "createdAt": "2025-02-17T15:00:46Z",
+      "updatedAt": "2025-02-17T15:00:46Z",
+      "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
+      "baseRefName": "main",
+      "baseRefOid": "f240043d8c8e61476810b903e41768c479cf94d9",
+      "headRepository": "mxinden/draft-seemann-tsvwg-udp-fragmentation",
+      "headRefName": "add-co-author",
+      "headRefOid": "83c122a7d6f1727a3ca4b1d4e93bf919a075d87d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
