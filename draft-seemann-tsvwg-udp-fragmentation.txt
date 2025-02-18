@@ -3,9 +3,9 @@
 
 
 Transport and Services Working Group                          M. Seemann
-Internet-Draft                                          13 November 2024
+Internet-Draft                                          18 February 2025
 Intended status: Informational                                          
-Expires: 17 May 2025
+Expires: 22 August 2025
 
 
             Controlling IP Fragmentation on Common Platforms
@@ -47,11 +47,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 May 2025.
+   This Internet-Draft will expire on 22 August 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -103,7 +103,7 @@ Table of Contents
    Path MTU are dropped, allowing the endpoint to detect the MTU
    limitation.
 
-   QUIC [RFC9000] is one such protocol that runs over UDP and make use
+   QUIC [RFC9000] is one such protocol that runs over UDP and makes use
    of DPLPMTUD.  As QUIC implementations typically run in user space,
    they need to configure the DF bit on their UDP sockets to perform
    DPLPMTUD correctly.
