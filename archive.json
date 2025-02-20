@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-18T00:26:44.727874+00:00",
+  "timestamp": "2025-02-20T00:27:16.965951+00:00",
   "repo": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
   "labels": [
     {
@@ -895,78 +895,126 @@
       "id": "PR_kwDONMXNnM6LeMLR",
       "title": "fix: typo contractary contrary",
       "url": "https://github.com/marten-seemann/draft-seemann-tsvwg-udp-fragmentation/pull/16",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "mxinden",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-02-17T14:47:52Z",
-      "updatedAt": "2025-02-17T14:47:52Z",
+      "updatedAt": "2025-02-18T04:41:01Z",
       "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
       "baseRefName": "main",
       "baseRefOid": "f240043d8c8e61476810b903e41768c479cf94d9",
       "headRepository": "mxinden/draft-seemann-tsvwg-udp-fragmentation",
       "headRefName": "typo-contrary",
       "headRefOid": "fea2f7ee3df05e9c4157047b283dc0922e80c12f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-02-18T04:41:01Z",
+      "mergedAt": "2025-02-18T04:41:01Z",
+      "mergedBy": "marten-seemann",
+      "mergeCommit": {
+        "oid": "f908be23499c67a5e791d8244646a20e9faee77c"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDONMXNnM6cTvS5",
+          "commit": {
+            "abbreviatedOid": "fea2f7e"
+          },
+          "author": "marten-seemann",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-18T04:40:54Z",
+          "updatedAt": "2025-02-18T04:40:54Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 17,
       "id": "PR_kwDONMXNnM6LeNKf",
       "title": "fix: typo make makes",
       "url": "https://github.com/marten-seemann/draft-seemann-tsvwg-udp-fragmentation/pull/17",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "mxinden",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-02-17T14:49:36Z",
-      "updatedAt": "2025-02-17T14:49:36Z",
+      "updatedAt": "2025-02-18T04:40:12Z",
       "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
       "baseRefName": "main",
       "baseRefOid": "f240043d8c8e61476810b903e41768c479cf94d9",
       "headRepository": "mxinden/draft-seemann-tsvwg-udp-fragmentation",
       "headRefName": "typo-makes",
       "headRefOid": "e1febaae5787a8b01bbafea614c231609df5ae94",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-02-18T04:40:12Z",
+      "mergedAt": "2025-02-18T04:40:12Z",
+      "mergedBy": "marten-seemann",
+      "mergeCommit": {
+        "oid": "d22736d19869cbf00f94a5c3d6f43757de54e868"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDONMXNnM6cTvGQ",
+          "commit": {
+            "abbreviatedOid": "e1febaa"
+          },
+          "author": "marten-seemann",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-18T04:40:06Z",
+          "updatedAt": "2025-02-18T04:40:06Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 18,
       "id": "PR_kwDONMXNnM6LeTVp",
       "title": "chore: add Max as co-author",
       "url": "https://github.com/marten-seemann/draft-seemann-tsvwg-udp-fragmentation/pull/18",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "mxinden",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Taking you up on the offer to become co-author.\r\n\r\nThough it should be noted that you did most of the work!",
       "createdAt": "2025-02-17T15:00:46Z",
-      "updatedAt": "2025-02-17T15:00:46Z",
+      "updatedAt": "2025-02-18T04:40:36Z",
       "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
       "baseRefName": "main",
       "baseRefOid": "f240043d8c8e61476810b903e41768c479cf94d9",
       "headRepository": "mxinden/draft-seemann-tsvwg-udp-fragmentation",
       "headRefName": "add-co-author",
       "headRefOid": "83c122a7d6f1727a3ca4b1d4e93bf919a075d87d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-02-18T04:40:36Z",
+      "mergedAt": "2025-02-18T04:40:36Z",
+      "mergedBy": "marten-seemann",
+      "mergeCommit": {
+        "oid": "556a19f690aa3eb6df2bb0be2773b27791b7f75b"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDONMXNnM6cTvMW",
+          "commit": {
+            "abbreviatedOid": "83c122a"
+          },
+          "author": "marten-seemann",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-18T04:40:30Z",
+          "updatedAt": "2025-02-18T04:40:30Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
