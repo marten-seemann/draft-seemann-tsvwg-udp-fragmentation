@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-20T00:27:16.965951+00:00",
+  "timestamp": "2025-02-23T00:29:24.015092+00:00",
   "repo": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
   "labels": [
     {
@@ -422,13 +422,13 @@
       "labels": [],
       "body": "1. Use `IP*_PMTUDISC_PROBE` instead of `IP*_PMTUDISC_DO`, in order to disable Linux's own PMTUD and to send packets larger than the observed Path MTU.\r\n2. Use `IP*_DONTFRAG` to receive errors when sending packets larger than the interface MTU.\r\n---\r\nFixes #13 \r\n\r\n@marten-seemann and @ralith this is my understanding of the socket options. Thoughts?",
       "createdAt": "2024-12-08T15:00:37Z",
-      "updatedAt": "2025-02-17T15:57:00Z",
+      "updatedAt": "2025-02-20T20:45:10Z",
       "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
       "baseRefName": "main",
       "baseRefOid": "f240043d8c8e61476810b903e41768c479cf94d9",
       "headRepository": "mxinden/draft-seemann-tsvwg-udp-fragmentation",
       "headRefName": "probe",
-      "headRefOid": "e9edf300bd164acf6655a0ff83c7ef67f3e8fddf",
+      "headRefOid": "783d07001d785e03bf6ca769cfdc56bb6a4d97f5",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
