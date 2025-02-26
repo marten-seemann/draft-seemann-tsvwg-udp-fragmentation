@@ -48,14 +48,14 @@ platforms.
 {{!RFC0791}} defines the Don't Fragment (DF) bit in the IPv4 header. When set,
 this bit prevents routers from fragmenting IP packets. If a router needs to
 fragment a packet with the DF bit set, it will instead drop the packet and send
-an ICMP "fragmentation needed" message back to the sender.
+an ICMP "Fragmentation Needed" message back to the sender.
 
 The DF bit has historically been most relevant to TCP ({{!RFC9293}}), where the
 kernel handles Path MTU Discovery (PMTUD) internally. Applications using TCP
 sockets do not need to interact with the DF bit directly.
 
 In IPv6 ({{!RFC8200}}), fragmentation by intermediate nodes is not permitted.
-All IPv6 packets effectively have the DF bit set, however, the endpoint's kernel
+All IPv6 packets effectively have the DF bit set, however, the sender's kernel
 might still break up UDP datagrams that are too large to fit the MTU of the
 interface before sending a packet into the network.
 
@@ -91,14 +91,18 @@ IPv4 sockets and prevent fragmentation on IPv6 sockets.
 ## Linux
 
 PMTUD behavior is controlled via the IP_MTU_DISCOVER and IPV6_MTU_DISCOVER
-socket option on level IPPROTO_IP and IPPROTO_IPV6. A value of IP_PMTUDISC_DO
-and IPV6_PMTUDISC_DO turns on the DF bit, and enables the processing of ICMP
-packets by the kernel. A value of IP_PMTUDISC_PROBE and IPV6_PMTUDISC_PROBE
-turns on the DF bit, and disables the processing of ICMP packets by the kernel.
+socket options at the IPPROTO_IP and IPPROTO_IPV6 levels. There are two closely
+related values:
+* IP_PMTUDISC_DO and IPV6_PMTUDISC_DO for IPv6 enable setting the DF bit, and
+  enable the processing of ICMP packets by the kernel.
+* IP_PMTUDISC_PROBE and IPV6_PMTUDISC_PROBE enable the DF bit, and disable ICMP
+  packet processing.
 
-Given that IP_PMTUDISC_DO and IPV6_PMTUDISC_DO prevent sending datagrams larger
-than the observed path MTU and are prone to the Blind Performance-Degrading ICMP
-attack ({{!RFC5927}}), one should use IP_PMTUDISC_PROBE and IPV6_PMTUDISC_PROBE.
+When an ICMP "Fragmentation Needed" message is received, the kernel will prevent
+the transmission of larger datagrams. Consequently, IP_PMTUDISC_DO makes
+applications vulnerable to the UDP equivalent of the Blind Performance-Degrading
+ICMP attack described in {{Section 7 of !RFC5927}}. This vulnerability does not
+exist when using IP_PMTUDISC_PROBE and IPV6_PMTUDISC_PROBE.
 
 For dual-stack sockets, both IPv4 and IPv6 socket options can be set
 independently.
@@ -117,8 +121,8 @@ be sent using an IPv4-mapped IPv6 address.
 
 When using a dual-stack socket, it is only necessary (and possible) to set the
 IPV6_DONTFRAG socket option. This results in the DF bit being set when sending
-IPv4 packets. It is not possible to control the fragmentation behavior of IPv4
-and IPv6 separately.
+IPv4 packets, and prevents fragmentation of IPv6 packets. It is not possible to
+control the fragmentation behavior of IPv4 and IPv6 separately.
 
 
 ## Windows
