@@ -22,10 +22,10 @@
 
 #ifdef __linux__
     typedef int sock_optval_t;
-    #define IPV4_MTU_DISCOVER_OPTNAME IP_MTU_DISCOVER
-    #define IPV4_MTU_DISCOVER_OPTVAL IP_PMTUDISC_PROBE
-    #define IPV6_MTU_DISCOVER_OPTNAME IPV6_MTU_DISCOVER
-    #define IPV6_MTU_DISCOVER_OPTVAL IPV6_PMTUDISC_PROBE
+    #define IPV4_DONTFRAG_OPTNAME IP_MTU_DISCOVER
+    #define IPV4_DONTFRAG_OPTVAL IP_PMTUDISC_PROBE
+    #define IPV6_DONTFRAG_OPTNAME IPV6_MTU_DISCOVER
+    #define IPV6_DONTFRAG_OPTVAL IPV6_PMTUDISC_PROBE
 #elif defined(__APPLE__)
     typedef int sock_optval_t;
     #define IPV4_DONTFRAG_OPTNAME IP_DONTFRAG
@@ -147,39 +147,21 @@ int main(int argc, char *argv[]) {
     #endif
 
     if(should_set_ipv4_df) {
-        #ifdef __linux__
-        sock_optval_t opt_val = IPV4_MTU_DISCOVER_OPTVAL;
-        if (setsockopt(sock, IPPROTO_IP, IPV4_MTU_DISCOVER_OPTNAME, &opt_val, sizeof(opt_val)) < 0) {
-            perror("setsockopt ipv4 mtu discover");
-            close(sock);
-            return 1;
-        }
-        #else
         sock_optval_t opt_val = IPV4_DONTFRAG_OPTVAL;
         if (setsockopt(sock, IPPROTO_IP, IPV4_DONTFRAG_OPTNAME, &opt_val, sizeof(opt_val)) < 0) {
             perror("setsockopt ipv4 dontfrag");
             close(sock);
             return 1;
         }
-        #endif
     }
 
     if(net_type == IPV6 || net_type == DUAL) {
-        #ifdef __linux__
-        sock_optval_t opt_val = IPV6_MTU_DISCOVER_OPTVAL;
-        if (setsockopt(sock, IPPROTO_IP, IPV6_MTU_DISCOVER_OPTNAME, &opt_val, sizeof(opt_val)) < 0) {
-            perror("setsockopt ipv6 mtu discover");
-            close(sock);
-            return 1;
-        }
-        #else
         sock_optval_t opt_val = IPV6_DONTFRAG_OPTVAL;
         if (setsockopt(sock, IPPROTO_IPV6, IPV6_DONTFRAG_OPTNAME, &opt_val, sizeof(opt_val)) < 0) {
             perror("setsockopt");
             close(sock);
             return 1;
         }
-        #endif
     }
 
     for (int i = 0; i < PACKET_COUNT; i++) {
