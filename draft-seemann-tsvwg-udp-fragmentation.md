@@ -89,13 +89,18 @@ IPv4 sockets and prevent fragmentation on IPv6 sockets.
 
 ## Linux
 
-Linux uses the socket option of level IPPROTO_IP with name IP_MTU_DISCOVER with
-value IP_PMTUDISC_DO for IPv4.
+PMTUD behavior is controlled via the IP_MTU_DISCOVER and IPV6_MTU_DISCOVER
+socket option on level IPPROTO_IP and IPPROTO_IPV6. A value of IP_PMTUDISC_DO
+and IPV6_PMTUDISC_DO turns on the DF bit, and enables the processing of ICMP
+packets by the kernel. A value of IP_PMTUDISC_PROBE and IPV6_PMTUDISC_PROBE
+turns on the DF bit, and disables the processing of ICMP packets by the kernel.
 
-For IPv6, IPV6_MTU_DISCOVER with a value of IPV6_PMTUDISC_DO is used for the
-IPPROTO_IPV6 level.
+Given that IP_PMTUDISC_DO and IPV6_PMTUDISC_DO prevent sending datagrams larger
+than the observed path MTU and are prone to the Blind Performance-Degrading ICMP
+attack ({{!RFC5927}}), one should use IP_PMTUDISC_PROBE and IPV6_PMTUDISC_PROBE.
 
-For dual-stack sockets, both socket options can be set independently.
+For dual-stack sockets, both IPv4 and IPv6 socket options can be set
+independently.
 
 
 ## Apple

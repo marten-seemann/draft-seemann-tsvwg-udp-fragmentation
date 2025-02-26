@@ -23,9 +23,9 @@
 #ifdef __linux__
     typedef int sock_optval_t;
     #define IPV4_DONTFRAG_OPTNAME IP_MTU_DISCOVER
-    #define IPV4_DONTFRAG_OPTVAL IP_PMTUDISC_DO
+    #define IPV4_DONTFRAG_OPTVAL IP_PMTUDISC_PROBE
     #define IPV6_DONTFRAG_OPTNAME IPV6_MTU_DISCOVER
-    #define IPV6_DONTFRAG_OPTVAL IPV6_PMTUDISC_DO
+    #define IPV6_DONTFRAG_OPTVAL IPV6_PMTUDISC_PROBE
 #elif defined(__APPLE__)
     typedef int sock_optval_t;
     #define IPV4_DONTFRAG_OPTNAME IP_DONTFRAG
