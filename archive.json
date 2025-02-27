@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-25T00:30:34.520313+00:00",
+  "timestamp": "2025-02-27T00:27:32.537195+00:00",
   "repo": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
   "labels": [
     {
@@ -111,15 +111,15 @@
       "id": "I_kwDONMXNnM6gSByC",
       "title": "use IP_PMTUDISC_PROBE instead of IP_PMTUDISC_DO on Linux",
       "url": "https://github.com/marten-seemann/draft-seemann-tsvwg-udp-fragmentation/issues/13",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "marten-seemann",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "And explain the difference between the two.",
       "createdAt": "2024-11-25T04:41:45Z",
-      "updatedAt": "2024-12-02T20:37:56Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-26T14:57:05Z",
+      "closedAt": "2025-02-26T14:57:05Z",
       "comments": [
         {
           "author": "mxinden",
@@ -415,24 +415,26 @@
       "id": "PR_kwDONMXNnM6EcfB0",
       "title": "fix(linux): use IP*_PMTUDISC_PROBE",
       "url": "https://github.com/marten-seemann/draft-seemann-tsvwg-udp-fragmentation/pull/14",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "mxinden",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "1. Use `IP*_PMTUDISC_PROBE` instead of `IP*_PMTUDISC_DO`, in order to disable Linux's own PMTUD and to send packets larger than the observed Path MTU.\r\n2. Use `IP*_DONTFRAG` to receive errors when sending packets larger than the interface MTU.\r\n---\r\nFixes #13 \r\n\r\n@marten-seemann and @ralith this is my understanding of the socket options. Thoughts?",
       "createdAt": "2024-12-08T15:00:37Z",
-      "updatedAt": "2025-02-24T13:43:35Z",
+      "updatedAt": "2025-02-26T18:53:35Z",
       "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
       "baseRefName": "main",
       "baseRefOid": "f240043d8c8e61476810b903e41768c479cf94d9",
       "headRepository": "mxinden/draft-seemann-tsvwg-udp-fragmentation",
       "headRefName": "probe",
-      "headRefOid": "783d07001d785e03bf6ca769cfdc56bb6a4d97f5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "b39c855e47831e52a49b7ae7ca009e0a2edef80e",
+      "closedAt": "2025-02-26T14:57:04Z",
+      "mergedAt": "2025-02-26T14:57:04Z",
+      "mergedBy": "marten-seemann",
+      "mergeCommit": {
+        "oid": "7c1571b9387d67b40874b3394701bdfcf1193e09"
+      },
       "comments": [
         {
           "author": "mxinden",
@@ -454,6 +456,13 @@
           "body": "Friendly ping @marten-seemann. Is thing ready to merge?",
           "createdAt": "2025-02-24T13:43:33Z",
           "updatedAt": "2025-02-24T13:43:33Z"
+        },
+        {
+          "author": "mxinden",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I believe all we need to do is rename the constant. Please let me know if you believe this is wrong, then I'll fix it in a follow-up PR, but I'd like to get the text change in.\r\n\r\nTrue. I am fine with either version. Yours is definitely smaller. Let's go with your version. Thanks for the commit.\r\n\r\n",
+          "createdAt": "2025-02-26T18:53:33Z",
+          "updatedAt": "2025-02-26T18:53:33Z"
         }
       ],
       "reviews": [
@@ -894,6 +903,19 @@
               "updatedAt": "2025-02-17T15:45:28Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6dpLmF",
+          "commit": {
+            "abbreviatedOid": "b39c855"
+          },
+          "author": "marten-seemann",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Yes, thank you for researching RFC 5927 @mxinden!\r\n\r\nI reverted some of the code changes, I believe all we need to do is rename the constant. Please let me know if you believe this is wrong, then I'll fix it in a follow-up PR, but I'd like to get the text change in.",
+          "createdAt": "2025-02-26T14:56:33Z",
+          "updatedAt": "2025-02-26T14:56:33Z",
+          "comments": []
         }
       ]
     },
@@ -1020,6 +1042,87 @@
           "createdAt": "2025-02-18T04:40:30Z",
           "updatedAt": "2025-02-18T04:40:30Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDONMXNnM6MqR1Y",
+      "title": "add Marten's affiliation",
+      "url": "https://github.com/marten-seemann/draft-seemann-tsvwg-udp-fragmentation/pull/19",
+      "state": "MERGED",
+      "author": "marten-seemann",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-02-26T14:58:26Z",
+      "updatedAt": "2025-02-26T15:01:15Z",
+      "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
+      "baseRefName": "main",
+      "baseRefOid": "7c1571b9387d67b40874b3394701bdfcf1193e09",
+      "headRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
+      "headRefName": "marten-affiliation",
+      "headRefOid": "2ede6ce198d0ad36c92f5d8679f9d128a36f7862",
+      "closedAt": "2025-02-26T15:01:14Z",
+      "mergedAt": "2025-02-26T15:01:14Z",
+      "mergedBy": "marten-seemann",
+      "mergeCommit": {
+        "oid": "8be5ac9a17870fb8e716b231215ee61cae42f647"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDONMXNnM6Mqd46",
+      "title": "editorial pass ahead of the 01 draft",
+      "url": "https://github.com/marten-seemann/draft-seemann-tsvwg-udp-fragmentation/pull/20",
+      "state": "OPEN",
+      "author": "marten-seemann",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "From my perspective, this is all we need to ship the next draft version.",
+      "createdAt": "2025-02-26T15:16:35Z",
+      "updatedAt": "2025-02-26T18:59:05Z",
+      "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
+      "baseRefName": "main",
+      "baseRefOid": "8be5ac9a17870fb8e716b231215ee61cae42f647",
+      "headRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
+      "headRefName": "editorial-pass",
+      "headRefOid": "2c848a293167dbd2554507cd5209ae1f671508d7",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONMXNnM6dr_-b",
+          "commit": {
+            "abbreviatedOid": "2c848a2"
+          },
+          "author": "mxinden",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Two comments. Otherwise looks good to me.",
+          "createdAt": "2025-02-26T18:56:50Z",
+          "updatedAt": "2025-02-26T18:59:05Z",
+          "comments": [
+            {
+              "originalPosition": 40,
+              "body": "This is confusing to me. The first sentence is only correct with `IP_PMTUDISC_DO`, but does not say so.",
+              "createdAt": "2025-02-26T18:56:50Z",
+              "updatedAt": "2025-02-26T18:59:05Z"
+            },
+            {
+              "originalPosition": 40,
+              "body": "The second sentence lists `IP_PMTUDISC_DO` only. The last sentence lists both `IP_PMTUDISC_PROBE` and `IPV6_PMTUDISC_PROBE`. I suggest either always listing both ipv4 and ipv6 options, or only listing ipv4 option, but not mix the two styles.",
+              "createdAt": "2025-02-26T18:58:18Z",
+              "updatedAt": "2025-02-26T18:59:05Z"
+            }
+          ]
         }
       ]
     }
