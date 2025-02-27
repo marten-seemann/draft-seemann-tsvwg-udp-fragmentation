@@ -92,14 +92,16 @@ IPv4 sockets and prevent fragmentation on IPv6 sockets.
 
 PMTUD behavior is controlled via the IP_MTU_DISCOVER and IPV6_MTU_DISCOVER
 socket options at the IPPROTO_IP and IPPROTO_IPV6 levels. There are two closely
-related values:
-* IP_PMTUDISC_DO and IPV6_PMTUDISC_DO for IPv6 enable setting the DF bit, and
-  enable the processing of ICMP packets by the kernel.
-* IP_PMTUDISC_PROBE and IPV6_PMTUDISC_PROBE enable the DF bit, and disable ICMP
-  packet processing.
+related values: For IPv4, both IP_PMTUDISC_DO and IP_PMTUDISC_PROBE enable
+setting the DF bit. For IPv6, both IPV6_PMTUDISC_DO and IPV6_PMTUDISC_PROBE
+prevent fragmentation by the sender.
 
-When an ICMP "Fragmentation Needed" message is received, the kernel will prevent
-the transmission of larger datagrams. Consequently, IP_PMTUDISC_DO makes
+The difference between the former and the latter is that the former instructs
+the kernel to process ICMP "Fragmentation Needed" messages, while the latter
+does not.
+
+When the kernel processes an ICMP "Fragmentation Needed" message, it will
+prevent the transmission of larger datagrams. Consequently, IP_PMTUDISC_DO makes
 applications vulnerable to the UDP equivalent of the Blind Performance-Degrading
 ICMP attack described in {{Section 7 of !RFC5927}}. This vulnerability does not
 exist when using IP_PMTUDISC_PROBE and IPV6_PMTUDISC_PROBE.
