@@ -5,8 +5,8 @@
 Transport and Services Working Group                          M. Seemann
 Internet-Draft                                                 Smallstep
 Intended status: Informational                                  M. Inden
-Expires: 30 August 2025                                          Mozilla
-                                                        26 February 2025
+Expires: 31 August 2025                                          Mozilla
+                                                        27 February 2025
 
 
             Controlling IP Fragmentation on Common Platforms
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 August 2025.
+   This Internet-Draft will expire on 31 August 2025.
 
 Copyright Notice
 
@@ -83,7 +83,7 @@ Table of Contents
    [RFC0791] defines the Don't Fragment (DF) bit in the IPv4 header.
    When set, this bit prevents routers from fragmenting IP packets.  If
    a router needs to fragment a packet with the DF bit set, it will
-   instead drop the packet and send an ICMP "fragmentation needed"
+   instead drop the packet and send an ICMP "Fragmentation Needed"
    message back to the sender.
 
    The DF bit has historically been most relevant to TCP ([RFC9293]),
@@ -93,9 +93,9 @@ Table of Contents
 
    In IPv6 ([RFC8200]), fragmentation by intermediate nodes is not
    permitted.  All IPv6 packets effectively have the DF bit set,
-   however, the endpoint's kernel might still break up UDP datagrams
-   that are too large to fit the MTU of the interface before sending a
-   packet into the network.
+   however, the sender's kernel might still break up UDP datagrams that
+   are too large to fit the MTU of the interface before sending a packet
+   into the network.
 
    [RFC8899] defines Datagram Packetization Layer Path MTU Discovery
    (DPLPMTUD), a mechanism that allows protocols running over UDP to
@@ -134,15 +134,21 @@ Table of Contents
 3.1.  Linux
 
    PMTUD behavior is controlled via the IP_MTU_DISCOVER and
-   IPV6_MTU_DISCOVER socket option on level IPPROTO_IP and IPPROTO_IPV6.
-   A value of IP_PMTUDISC_DO and IPV6_PMTUDISC_DO turns on the DF bit,
-   and enables the processing of ICMP packets by the kernel.  A value of
-   IP_PMTUDISC_PROBE and IPV6_PMTUDISC_PROBE turns on the DF bit, and
-   disables the processing of ICMP packets by the kernel.
+   IPV6_MTU_DISCOVER socket options at the IPPROTO_IP and IPPROTO_IPV6
+   levels.  There are two closely related values: For IPv4, both
+   IP_PMTUDISC_DO and IP_PMTUDISC_PROBE enable setting the DF bit.  For
+   IPv6, both IPV6_PMTUDISC_DO and IPV6_PMTUDISC_PROBE prevent
+   fragmentation by the sender.
 
-   Given that IP_PMTUDISC_DO and IPV6_PMTUDISC_DO prevent sending
-   datagrams larger than the observed path MTU and are prone to the
-   Blind Performance-Degrading ICMP attack ([RFC5927]), one should use
+   The difference between the former and the latter is that the former
+   instructs the kernel to process ICMP "Fragmentation Needed" messages,
+   while the latter does not.
+
+   When the kernel processes an ICMP "Fragmentation Needed" message, it
+   will prevent the transmission of larger datagrams.  Consequently,
+   IP_PMTUDISC_DO makes applications vulnerable to the UDP equivalent of
+   the Blind Performance-Degrading ICMP attack described in Section 7 of
+   [RFC5927].  This vulnerability does not exist when using
    IP_PMTUDISC_PROBE and IPV6_PMTUDISC_PROBE.
 
    For dual-stack sockets, both IPv4 and IPv6 socket options can be set
@@ -162,8 +168,9 @@ Table of Contents
 
    When using a dual-stack socket, it is only necessary (and possible)
    to set the IPV6_DONTFRAG socket option.  This results in the DF bit
-   being set when sending IPv4 packets.  It is not possible to control
-   the fragmentation behavior of IPv4 and IPv6 separately.
+   being set when sending IPv4 packets, and prevents fragmentation of
+   IPv6 packets.  It is not possible to control the fragmentation
+   behavior of IPv4 and IPv6 separately.
 
 3.3.  Windows
 
