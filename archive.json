@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-27T00:27:32.537195+00:00",
+  "timestamp": "2025-03-02T00:30:00.016065+00:00",
   "repo": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
   "labels": [
     {
@@ -1078,25 +1078,35 @@
       "id": "PR_kwDONMXNnM6Mqd46",
       "title": "editorial pass ahead of the 01 draft",
       "url": "https://github.com/marten-seemann/draft-seemann-tsvwg-udp-fragmentation/pull/20",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "marten-seemann",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "From my perspective, this is all we need to ship the next draft version.",
       "createdAt": "2025-02-26T15:16:35Z",
-      "updatedAt": "2025-02-26T18:59:05Z",
+      "updatedAt": "2025-02-27T09:10:44Z",
       "baseRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
       "baseRefName": "main",
       "baseRefOid": "8be5ac9a17870fb8e716b231215ee61cae42f647",
       "headRepository": "marten-seemann/draft-seemann-tsvwg-udp-fragmentation",
       "headRefName": "editorial-pass",
-      "headRefOid": "2c848a293167dbd2554507cd5209ae1f671508d7",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "baba4a6e492ebae217e6e753bd5a751f71026128",
+      "closedAt": "2025-02-27T09:10:44Z",
+      "mergedAt": "2025-02-27T09:10:44Z",
+      "mergedBy": "marten-seemann",
+      "mergeCommit": {
+        "oid": "e8ea0bdef689e807c1008c732d3ac2796f717509"
+      },
+      "comments": [
+        {
+          "author": "marten-seemann",
+          "authorAssociation": "OWNER",
+          "body": "I reworded the paragraph to be more precise about IPv4 and IPv6.",
+          "createdAt": "2025-02-27T05:47:38Z",
+          "updatedAt": "2025-02-27T05:47:38Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDONMXNnM6dr_-b",
@@ -1123,6 +1133,19 @@
               "updatedAt": "2025-02-26T18:59:05Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDONMXNnM6dxhRL",
+          "commit": {
+            "abbreviatedOid": "baba4a6"
+          },
+          "author": "mxinden",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-27T08:35:49Z",
+          "updatedAt": "2025-02-27T08:35:49Z",
+          "comments": []
         }
       ]
     }
