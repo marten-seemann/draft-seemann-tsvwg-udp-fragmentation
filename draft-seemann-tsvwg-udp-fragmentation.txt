@@ -5,8 +5,8 @@
 Transport and Services Working Group                          M. Seemann
 Internet-Draft                                                 Smallstep
 Intended status: Informational                                  M. Inden
-Expires: 31 August 2025                                          Mozilla
-                                                        27 February 2025
+Expires: 8 January 2026                                          Mozilla
+                                                             7 July 2025
 
 
             Controlling IP Fragmentation on Common Platforms
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 August 2025.
+   This Internet-Draft will expire on 8 January 2026.
 
 Copyright Notice
 
@@ -145,10 +145,9 @@ Table of Contents
    while the latter does not.
 
    When the kernel processes an ICMP "Fragmentation Needed" message, it
-   will prevent the transmission of larger datagrams.  Consequently,
-   IP_PMTUDISC_DO makes applications vulnerable to the UDP equivalent of
-   the Blind Performance-Degrading ICMP attack described in Section 7 of
-   [RFC5927].  This vulnerability does not exist when using
+   will prevent the transmission of larger datagrams.  Applications that
+   wish to only respond to fully encrypted end-to-end signals (for
+   example QUIC ([RFC9000])) might therefore wish to use
    IP_PMTUDISC_PROBE and IPV6_PMTUDISC_PROBE.
 
    For dual-stack sockets, both IPv4 and IPv6 socket options can be set
@@ -202,10 +201,6 @@ Table of Contents
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
-
-   [RFC5927]  Gont, F., "ICMP Attacks against TCP", RFC 5927,
-              DOI 10.17487/RFC5927, July 2010,
-              <https://www.rfc-editor.org/rfc/rfc5927>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
