@@ -147,7 +147,7 @@ Table of Contents
    When the kernel processes an ICMP "Fragmentation Needed" message, it
    will prevent the transmission of larger datagrams.  Applications that
    wish to only respond to fully encrypted end-to-end signals (for
-   example QUIC ([RFC9000]))might therefore wish to use
+   example QUIC ([RFC9000])) might therefore wish to use
    IP_PMTUDISC_PROBE and IPV6_PMTUDISC_PROBE.
 
    For dual-stack sockets, both IPv4 and IPv6 socket options can be set
