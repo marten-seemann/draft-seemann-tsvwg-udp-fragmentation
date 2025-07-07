@@ -101,10 +101,10 @@ the kernel to process ICMP "Fragmentation Needed" messages, while the latter
 does not.
 
 When the kernel processes an ICMP "Fragmentation Needed" message, it will
-prevent the transmission of larger datagrams. Consequently, IP_PMTUDISC_DO makes
-applications vulnerable to the UDP equivalent of the Blind Performance-Degrading
-ICMP attack described in {{Section 7 of !RFC5927}}. This vulnerability does not
-exist when using IP_PMTUDISC_PROBE and IPV6_PMTUDISC_PROBE.
+prevent the transmission of larger datagrams. Applications that wish to only
+respond to fully encrypted end-to-end signals (for example QUIC
+({{RFC9000}})) might therefore wish to use IP_PMTUDISC_PROBE and
+IPV6_PMTUDISC_PROBE.
 
 For dual-stack sockets, both IPv4 and IPv6 socket options can be set
 independently.
