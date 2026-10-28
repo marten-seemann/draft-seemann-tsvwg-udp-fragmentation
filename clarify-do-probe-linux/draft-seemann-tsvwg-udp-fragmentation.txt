@@ -5,8 +5,8 @@
 Transport and Services Working Group                          M. Seemann
 Internet-Draft                                                 Smallstep
 Intended status: Informational                                  M. Inden
-Expires: 8 January 2026                                          Mozilla
-                                                             7 July 2025
+Expires: 1 May 2027                                              Mozilla
+                                                         28 October 2026
 
 
             Controlling IP Fragmentation on Common Platforms
@@ -48,11 +48,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 January 2026.
+   This Internet-Draft will expire on 1 May 2027.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -140,9 +140,8 @@ Table of Contents
    IPv6, both IPV6_PMTUDISC_DO and IPV6_PMTUDISC_PROBE prevent
    fragmentation by the sender.
 
-   The difference between the former and the latter is that the former
-   instructs the kernel to process ICMP "Fragmentation Needed" messages,
-   while the latter does not.
+   The DO modes enforce the kernel's cached Path MTU, whereas the PROBE
+   modes permit sending packets larger than that cached value.
 
    When the kernel processes an ICMP "Fragmentation Needed" message, it
    will prevent the transmission of larger datagrams.  Applications that
@@ -194,7 +193,7 @@ Table of Contents
 6.  Normative References
 
    [RFC0791]  Postel, J., "Internet Protocol", STD 5, RFC 791,
-              DOI 10.17487/RFC0791, September 1981,
+              DOI 10.17487/RFC791, September 1981,
               <https://www.rfc-editor.org/rfc/rfc791>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
