@@ -21,7 +21,6 @@ keyword:
 author:
  -
     fullname: Marten Seemann
-    organization: Smallstep
     email: martenseemann@gmail.com
  -
     fullname: Max Inden
