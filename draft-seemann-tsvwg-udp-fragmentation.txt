@@ -3,7 +3,7 @@
 
 
 Transport and Services Working Group                          M. Seemann
-Internet-Draft                                                 Smallstep
+Internet-Draft                                                          
 Intended status: Informational                                  M. Inden
 Expires: 1 May 2027                                              Mozilla
                                                          28 October 2026
@@ -237,7 +237,6 @@ Acknowledgments
 Authors' Addresses
 
    Marten Seemann
-   Smallstep
    Email: martenseemann@gmail.com
 
 
