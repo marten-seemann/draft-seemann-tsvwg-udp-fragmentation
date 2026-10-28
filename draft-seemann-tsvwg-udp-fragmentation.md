@@ -55,7 +55,7 @@ kernel handles Path MTU Discovery (PMTUD) internally. Applications using TCP
 sockets do not need to interact with the DF bit directly.
 
 In IPv6 ({{!RFC8200}}), fragmentation by intermediate nodes is not permitted.
-All IPv6 packets effectively have the DF bit set, however, the sender's kernel
+All IPv6 packets effectively have the DF bit set; however, the sender's kernel
 might still break up UDP datagrams that are too large to fit the MTU of the
 interface before sending a packet into the network.
 
@@ -101,7 +101,7 @@ permit sending packets larger than that cached value.
 
 When the kernel processes an ICMP "Fragmentation Needed" message, it will
 prevent the transmission of larger datagrams. Applications that wish to only
-respond to fully encrypted end-to-end signals (for example QUIC
+respond to fully encrypted end-to-end signals (for example, QUIC
 ({{RFC9000}})) might therefore wish to use IP_PMTUDISC_PROBE and
 IPV6_PMTUDISC_PROBE.
 
@@ -111,8 +111,8 @@ independently.
 
 ## Apple
 
-For IPv4, Apple platforms use the socket option of level IPPROTO_IP with name
-IP_DONTFRAG with value 1. For IPv6, IPV6_DONTFRAG with value 1 is used for the
+For IPv4, Apple platforms use the IP_DONTFRAG socket option at the IPPROTO_IP
+level with a value of 1. For IPv6, IPV6_DONTFRAG with a value of 1 is used at the
 IPPROTO_IPV6 level.
 
 However, dual-stack sockets are handled differently: To open a dual-stack socket,
@@ -122,19 +122,19 @@ be sent using an IPv4-mapped IPv6 address.
 
 When using a dual-stack socket, it is only necessary (and possible) to set the
 IPV6_DONTFRAG socket option. This results in the DF bit being set when sending
-IPv4 packets, and prevents fragmentation of IPv6 packets. It is not possible to
+IPv4 packets and prevents fragmentation of IPv6 packets. It is not possible to
 control the fragmentation behavior of IPv4 and IPv6 separately.
 
 
 ## Windows
 
-For IPv4, Windows uses the socket option of level IPPROTO_IP with name
-IP_DONTFRAGMENT with value 1. For IPv6, IPV6_DONTFRAG with value 1 is used for
-the IPPROTO_IPV6 level.
+For IPv4, Windows uses the IP_DONTFRAGMENT socket option at the IPPROTO_IP
+level with a value of 1. For IPv6, IPV6_DONTFRAG with a value of 1 is used at the
+IPPROTO_IPV6 level.
 
-Similar to the Apple platforms, dual-stack sockets are IPv6 sockets with the
+As on Apple platforms, dual-stack sockets are IPv6 sockets with the
 IPV6_V6ONLY option set to 0. IPv4 packets must be sent using an IPv4-mapped
-IPv6 address. However, contrary to Apple platforms, the DF bit on IPv4
+IPv6 address. However, unlike on Apple platforms, the DF bit on IPv4
 packets is controlled by the IP_DONTFRAGMENT socket option.
 
 
