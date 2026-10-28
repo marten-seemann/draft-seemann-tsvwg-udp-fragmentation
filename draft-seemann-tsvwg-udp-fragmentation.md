@@ -126,6 +126,10 @@ IPV6_DONTFRAG socket option. This results in the DF bit being set when sending
 IPv4 packets, and prevents fragmentation of IPv6 packets. It is not possible to
 control the fragmentation behavior of IPv4 and IPv6 separately.
 
+On macOS, setting the DF bit on IPv4 packets sent from a dual-stack socket
+requires macOS 15 (Sequoia) or later. On earlier macOS versions,
+IPV6_DONTFRAG does not set the DF bit on IPv4 packets.
+
 
 ## Windows
 
