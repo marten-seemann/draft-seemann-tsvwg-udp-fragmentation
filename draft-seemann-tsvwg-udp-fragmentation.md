@@ -96,9 +96,8 @@ related values: For IPv4, both IP_PMTUDISC_DO and IP_PMTUDISC_PROBE enable
 setting the DF bit. For IPv6, both IPV6_PMTUDISC_DO and IPV6_PMTUDISC_PROBE
 prevent fragmentation by the sender.
 
-The difference between the former and the latter is that the former instructs
-the kernel to process ICMP "Fragmentation Needed" messages, while the latter
-does not.
+The DO modes enforce the kernel's cached Path MTU, whereas the PROBE modes
+permit sending packets larger than that cached value.
 
 When the kernel processes an ICMP "Fragmentation Needed" message, it will
 prevent the transmission of larger datagrams. Applications that wish to only
