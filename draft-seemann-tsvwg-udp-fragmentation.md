@@ -140,7 +140,12 @@ packets is controlled by the IP_DONTFRAGMENT socket option.
 
 # Security Considerations
 
-TODO Security
+Forged ICMP "Fragmentation Needed" or ICMPv6 "Packet Too Big" messages can
+reduce the kernel's cached Path MTU, degrading performance or preventing
+transmission. Applications performing DPLPMTUD need to avoid enforcement of
+that cached value and validate any ICMP messages they use, as described in
+{{RFC8899}}. Validation of quoted packets can mitigate off-path attacks,
+but does not prevent an on-path attacker from forging these messages.
 
 
 # IANA Considerations
